@@ -27,13 +27,7 @@
                 >
                 <h4 class="card-title">{{Audio.author}}</h4>
               </a>
-              <a
-                class="btn btn-floating halfway-fab bg-warning"
-                data-toggle="modal"
-                :data-target="getID(setdeleteID(Audio._id))"
-              >
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-              </a>
+              
             </div>
 
             <div class="card-content" style="height :140px ;">
@@ -49,8 +43,16 @@
                 class="btn btn-outline-warning"
                 data-toggle="modal"
                 :data-target="getID(Audio._id)"
-                style="width: 200px; background-color: #ED646E;"
+                style="width: 200px;"
               >EDIT</a>
+
+							<a
+                class="btn btn-floating halfway-fab bg-warning"
+                data-toggle="modal"
+                :data-target="getID(setdeleteID(Audio._id))"
+              >
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>
