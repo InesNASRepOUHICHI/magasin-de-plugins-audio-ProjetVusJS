@@ -268,8 +268,7 @@ export default {
         method: "DELETE"
       })
         .then(responseJSON => {
-          this.audios.splice(index, 1);
-          this.filteredaudios.splice(index, 1);
+          this.Audios.splice(Audio, 1);
           this.message = "Ce audio a été supprimé";
           this.showMessage = true;
           setTimeout(() => {
@@ -284,7 +283,10 @@ export default {
       console.log("--- UPDATE AUDIO ---");
 			let url = "http://localhost:8080/api/audios/" + Audio._id;
       fetch(url, {
-        method: "PUT",
+				method: "PUT",
+				headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
         body: JSON.stringify(Audio)
       })
         .then(responseJSON => {

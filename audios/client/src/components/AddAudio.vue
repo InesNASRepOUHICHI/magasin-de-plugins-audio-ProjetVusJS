@@ -74,13 +74,13 @@
 
 <script>
 export default {
-  author: "AddAudio",
+  name: "AddAudio",
   data() {
     return {
       newAudio: {
         _id: "",
         author: "",
-        audio_href: "http://",
+        audio_href: "",
         description: "",
         title: "",
         thumbnail_href: ""
@@ -90,20 +90,18 @@ export default {
   methods: {
     addAudio: function() {
       console.log("--- ADD AUDIO ---");
-
-      if (!this.newAudio.author || !this.newAudio.title) {
-        return;
-      }
-      this.colMod = false;
-      this.insertMod = false;
-      let url = "/api/audios";
+			let url = "http://localhost:8080/api/audios";
+			let data =JSON.stringify(this.newAudio);
       fetch(url, {
-        method: "POST",
-        body: newAudio
+				method: "POST",
+				headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: data
       })
         .then(responseJSON => {
           responseJSON.json().then(res => {
-            alert(res.data);
+            alert("Audio ajouté");
           });
         })
         .catch(function(err) {
@@ -111,28 +109,6 @@ export default {
         });
     },
     fillFields: function() {
-      fetch(
-        "https://www.googleapis.com/youtube/v3/Audios?part=snippet&id=" +
-          this.newAudio.audio_href.substring(32, 43) +
-          "&key=" +
-          "AIzaSyAfKdpiqmCJarHU1_3YAUbyXG110h6wKEw"
-      )
-        .then(resp => resp.json())
-        .then(resp => {
-          console.log(resp);
-          const Audio = {
-            id: resp.items[0].id,
-            author: resp.items[0].snippet.title,
-            description: resp.items[0].snippet.description,
-            starCount: null,
-            title: resp.items[0].snippet.publishedAt,
-            thumbnail_href: resp.items[0].snippet.thumbnails.high.audio_href
-          };
-          this.newAudio.author = Audio.author;
-          this.newAudio.description = Audio.description;
-          this.newAudio.title = Audio.title;
-          this.newAudio.thumbnail_href = Audio.thumbnail_href;
-        });
     }
   }
 };

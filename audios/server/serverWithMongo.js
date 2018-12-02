@@ -142,7 +142,7 @@ app.post('/api/audios', multerData.fields([]), function(req, res) {
 // Modification d'un audio, on fera l'update par
 // une requête http PUT, c'est le standard REST
 app.put('/api/audios/:id', multerData.fields([]), function(req, res) {
-	var id = req.params._id;
+	var id = req.params.id;
 
  	mongoDBModule.updateAudio(id, req.body, function(data) {
  		res.send(JSON.stringify(data)); 
@@ -153,7 +153,7 @@ app.put('/api/audios/:id', multerData.fields([]), function(req, res) {
 // On fera la suppression par une requête http DELETE
 // c'est le standard REST
 app.delete('/api/audios/:id', function(req, res) {
-	var id = req.params._id;
+	var id = req.params.id;
 
  	mongoDBModule.deleteAudio(id, function(data) {
  		res.send(JSON.stringify(data)); 
