@@ -178,10 +178,10 @@ exports.updateAudio = function(_id, formData, callback) {
 		if(!err) {
             let myquery = { "_id": ObjectId(_id)};
 	        let newvalues = {
-	        	title : formData.nom, 
+	        	title : formData.title, 
 	        	author : formData.author
-	        };
-
+			};
+			
 
 			db.collection("audios")
 			.replaceOne(myquery, newvalues, function(err, result) {

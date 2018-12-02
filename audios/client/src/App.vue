@@ -1,29 +1,20 @@
 <template>
   <div id="app">
-    <AudiosList msg="Welcome to Your Vue.js App"/>
+    <AppAudio/>
+    <AddAudio/>
   </div>
 </template>
-
 <script>
-import AudiosList from './components/AudiosList.vue'
-import listGrid from './components/listGrid'
-import listView from './components/listView'
-import gridView from './components/gridView'
+import AppAudio from './components/AppAudio'
+import AddAudio from './components/AddAudio'
+
+
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    AudiosList,listGrid, listView, gridView
+    AppAudio,
+    AddAudio
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
