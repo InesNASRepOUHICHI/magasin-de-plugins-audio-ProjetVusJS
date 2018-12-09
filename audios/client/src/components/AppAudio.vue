@@ -16,26 +16,28 @@
     </form>
     <div class="row match-height">
       <div v-for="Audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
-        <div class="card">
+        <div class="card" style="width=200px; height=200px;">
+          <h4 class="card-title">{{Audio.author.name}}</h4>
           <div class="card-body">
             <div class="card-img">
+              
               <a data-toggle="modal" :data-target="getID(setPlayID(Audio._id))">
                 <img
+                  style="height:150px; width:auto;"
                   class="card-img-top img-fluid"
-                  :src="Audio.thumbnail_href"
+                  :src="Audio.screenshotUrl"
                   alt="Card image cap"
                 >
-                <h4 class="card-title">{{Audio.author}}</h4>
+                
               </a>
-              
             </div>
 
-            <div class="card-content" style="height :140px ;">
+            <div class="card-content" style="height :auto ;">
               <a href="#"></a>
               <p class="row mb-1">
-                <small style="padding-left: 40px; padding-top: 5px;">{{Audio.title}}</small>
+                <small style="padding-left: 40px; padding-top: 5px;"></small>
               </p>
-              <p style="padding-left: 20px;">Author : {{Audio.author}}.</p>
+              <p style="padding-left: 20px;">{{Audio.comment}}.</p>
             </div>
 
             <div class="card-block" style="padding-left: 50px;">
@@ -45,8 +47,8 @@
                 :data-target="getID(Audio._id)"
                 style="width: 200px;"
               >EDIT</a>
-
-							<a
+              
+              <a
                 class="btn btn-floating halfway-fab bg-warning"
                 data-toggle="modal"
                 :data-target="getID(setdeleteID(Audio._id))"
@@ -83,7 +85,7 @@
                       type="text"
                       placeholder="author"
                       class="form-control"
-                      v-model="Audio.author"
+                      v-model="Audio.author.name"
                     >
                     <div class="form-control-position">
                       <i
@@ -92,13 +94,13 @@
                     </div>
                   </div>
 
-                  <label>audio_href:</label>
+                  <label>brand:</label>
                   <div class="form-group position-relative has-icon-left">
                     <input
-                      type="audio_href"
-                      placeholder="audio_href"
+                      type="brand"
+                      placeholder="brand"
                       class="form-control"
-                      v-model="Audio.audio_href"
+                      v-model="Audio.brand"
                     >
                     <div class="form-control-position">
                       <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
@@ -189,17 +191,18 @@
           aria-labelledby="myModalLabel34"
           aria-hidden="true"
         >
-          <div class="modal-dialog" role="document">
+  <!--        <div class="modal-dialog" role="document">
             <div class="modal-content">
               <figure>
                 <figcaption>Listen to {{Audio.title}}:</figcaption>
-                <audio controls :src="Audio.audio_href">
+                <audio controls :src="Audio.brand">
                   Your browser does not support the
                   <code>audio</code> element.
                 </audio>
               </figure>
             </div>
           </div>
+          -->
         </div>
       </div>
     </div>
@@ -215,18 +218,18 @@ export default {
       Audios: [],
       newAudio: {
         _id: "",
-        author: "",
-        audio_href: "",
+        author : {name: ""},
+        brand: "",
         description: "",
         title: "",
-        thumbnail_href: ""
+        screenshotUrl: ""
       },
       filterKey: ""
     };
   },
   mounted() {
     this.getDataFromServer(
-      "http://localhost:8080/api/audios?page=0&pagesize=30"
+      "http://localhost:8080/api/audios?page=0&pagesize=250"
     );
   },
   computed: {
@@ -281,11 +284,11 @@ export default {
     },
     editAudio: function(Audio) {
       console.log("--- UPDATE AUDIO ---");
-			let url = "http://localhost:8080/api/audios/" + Audio._id;
+      let url = "http://localhost:8080/api/audios/" + Audio._id;
       fetch(url, {
-				method: "PUT",
-				headers: {
-            "Content-Type": "application/json; charset=utf-8",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
         },
         body: JSON.stringify(Audio)
       })

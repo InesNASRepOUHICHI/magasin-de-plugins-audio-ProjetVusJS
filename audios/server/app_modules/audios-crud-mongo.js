@@ -7,7 +7,7 @@ var assert = require('assert');
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'test';
+const dbName = 'test1';
 
 exports.connexionMongo = function (callback) {
 	MongoClient.connect(url, function (err, client) {
@@ -133,7 +133,8 @@ exports.createAudio = function (formData, callback) {
 		if (!err) {
 
 			let toInsert = {
-				title: formData.title,
+				brand: formData.brand,
+				description: formData.description,
 				author: formData.author
 			};
 			console.dir(JSON.stringify(toInsert));
@@ -178,22 +179,21 @@ exports.updateAudio = function (id, formData, callback) {
 		if (!err) {
 			let myquery = { "_id": ObjectId(id) };
 			let newvalues = {
-				audio_href: formData.audio_href,
 				author: formData.author,
-				created: formData.created,
-				data: formData.data,
+				brand: formData.brand,
+				categories: formData.categories,
+				controlPorts: formData.controlPorts,
 				description: formData.description,
-				device_id: formData.device_id,
-				file_href: formData.file_href,
-				gravatar_hash: formData.gravatar_hash,
-				hidden: formData.hidden,
-				href: formData.href,
-				id: formData.id,
-				preview_href: formData.preview_href,
-				screenshot_href: formData.screenshot_href,
-				thumbnail_href: formData.thumbnail_href,
-				title: formData.title,
-				user_id: formData.user_id
+				imageHeight: formData.imageHeight,
+				imageWidth: formData.imageWidth,
+				label: formData.label,
+				name: formData.name,
+				pedalboardCount: formData.pedalboardCount,
+				screenshotUrl: formData.screenshotUrl,
+				stable: formData.stable,
+				thumbnailUrl: formData.thumbnailUrl,
+				uri: formData.uri,
+				version: formData.version
 			};
 
 			db.collection("audios")

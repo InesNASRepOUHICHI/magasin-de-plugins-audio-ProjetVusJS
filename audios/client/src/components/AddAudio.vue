@@ -18,27 +18,27 @@
         </div>
         <form v-on:submit.prevent="addAudio">
           <div class="modal-body">
-            <label>audio_href:</label>
+            <label>brand:</label>
             <div class="form-group position-relative has-icon-left">
               <input
-                type="audio_href"
-                placeholder="audio_href"
+                type="brand"
+                placeholder="brand"
                 class="form-control"
                 @change="fillFields()"
-                v-model="newAudio.audio_href"
+                v-model="newAudio.brand"
               >
               <div class="form-control-position">
                 <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
               </div>
             </div>
 
-            <label>author:</label>
+            <label>author name:</label>
             <div class="form-group position-relative has-icon-left">
               <input
                 type="text"
                 placeholder="author"
                 class="form-control"
-                v-model="newAudio.author"
+                v-model="newAudio.author.name"
               >
               <div class="form-control-position">
                 <i class="fa fa-Audio-camera font-medium-1 line-height-1 text-muted icon-align"></i>
@@ -79,11 +79,9 @@ export default {
     return {
       newAudio: {
         _id: "",
-        author: "",
-        audio_href: "",
-        description: "",
-        title: "",
-        thumbnail_href: ""
+        author: {name: ""},
+        brand: "",
+        description: ""
       }
     };
   },
