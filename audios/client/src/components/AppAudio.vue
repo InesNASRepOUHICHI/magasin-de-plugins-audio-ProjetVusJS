@@ -47,6 +47,13 @@
                 :data-target="getID(Audio._id)"
                 style="width: 200px;"
               >EDIT</a>
+
+              <a
+                class="btn btn-outline-warning"
+                data-toggle="modal"
+                :data-target="getDetails(Audio._id)"
+                style="width: 200px;"
+              >DETAILS</a>
               
               <a
                 class="btn btn-floating halfway-fab bg-warning"
@@ -301,6 +308,9 @@ export default {
     },
     getID: function(id) {
       return "#" + id;
+    },
+    getDetails: function(id) {
+      return "/detailsAudio/"+id;
     },
     setdeleteID: function(id) {
       return "del" + id;
