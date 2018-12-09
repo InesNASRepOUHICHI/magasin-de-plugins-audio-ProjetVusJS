@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form id="search" role="search" style="width: 300px;">
+    <form id="search" role="search" style="width: 300px;" align="left">
       <div class="position-relative has-icon-right">
         <input
           type="text"
@@ -14,13 +14,25 @@
         </div>
       </div>
     </form>
+    <div class="row" >
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <label class="control-label" >Show</label>
+        <select class="form-control" v-model="perPage">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
+
     <div class="row match-height">
       <div v-for="Audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
         <div class="card" style="width=200px; height=200px;">
-          <h4 class="card-title">{{Audio.author.name}}</h4>
+          <h4 class="card-title" align="center">{{Audio.author.name}}</h4>
           <div class="card-body">
-            <div class="card-img">
-              
+            <div class="card-img"  align="center">
               <a data-toggle="modal" :data-target="getID(setPlayID(Audio._id))">
                 <img
                   style="height:150px; width:auto;"
@@ -28,7 +40,6 @@
                   :src="Audio.screenshotUrl"
                   alt="Card image cap"
                 >
-                
               </a>
             </div>
 
@@ -47,7 +58,7 @@
                 :data-target="getID(Audio._id)"
                 style="width: 200px;"
               >EDIT</a>
-
+              
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
@@ -198,7 +209,7 @@
           aria-labelledby="myModalLabel34"
           aria-hidden="true"
         >
-  <!--        <div class="modal-dialog" role="document">
+          <!--        <div class="modal-dialog" role="document">
             <div class="modal-content">
               <figure>
                 <figcaption>Listen to {{Audio.title}}:</figcaption>
@@ -213,6 +224,19 @@
         </div>
       </div>
     </div>
+    <div class="text-center">
+      <button
+        class="btn btn-primary btn-xs"
+        v-show="showPrev"
+        @click.stop.prevent="renderList(currentPage-1)"
+      >Prev</button>
+      Page {{currentPage}} of {{totalPages}}
+      <button
+        class="btn btn-primary btn-xs"
+        v-show="showNext"
+        @click.stop.prevent="renderList(currentPage+1)"
+      >Next</button>
+    </div>
   </div>
 </template>
 
@@ -223,9 +247,13 @@ export default {
   data() {
     return {
       Audios: [],
+      audiosToDisplay: [],
+      perPage: 20,
+      pageToOpen: 1,
+      currentPage: 1,
       newAudio: {
         _id: "",
-        author : {name: ""},
+        author: { name: "" },
         brand: "",
         description: "",
         title: "",
@@ -235,14 +263,17 @@ export default {
     };
   },
   mounted() {
-    this.getDataFromServer(
-      "http://localhost:8080/api/audios?page=0&pagesize=250"
-    );
+    // this.getDataFromServer(
+    //   "http://localhost:8080/api/audios?page=0&pagesize=250"
+    //  );
+  },
+  created() {
+    this.getAudios();
   },
   computed: {
     filteredData: function() {
       var filterKey = this.filterKey && this.filterKey.toLowerCase();
-      var data = this.Audios;
+      var data = this.audiosToDisplay;
       if (filterKey) {
         data = data.filter(function(row) {
           return Object.keys(row).some(function(key) {
@@ -255,6 +286,40 @@ export default {
         });
       }
       return data;
+    },
+    totalPages() {
+      //calculate the total number of pages based on the number of items to show per page and the total items we got from server
+      return this.Audios.length && this.Audios.length > this.perPage
+        ? Math.ceil(this.Audios.length / this.perPage)
+        : 1;
+    },
+
+    start() {
+      return (this.pageToOpen - 1) * this.perPage;
+    },
+
+    stop() {
+      //stop at the end of the array if array length OR the items left are less than the number of items to show per page
+      //do the calculation if otherwise
+      if (this.Audios.length - this.start >= this.perPage) {
+        return this.pageToOpen * this.perPage - 1;
+      } else {
+        return this.Audios.length - 1;
+      }
+    },
+
+    showNext() {
+      return this.currentPage < this.totalPages;
+    },
+
+    showPrev() {
+      return this.currentPage > 1;
+    }
+  },
+  watch: {
+    //re-render list based on the value of `perPage` which indicates how many to show per page
+    perPage: function() {
+      this.renderList();
     }
   },
   methods: {
@@ -270,6 +335,48 @@ export default {
           console.log("erreur dans le get : " + err);
         });
     },
+    getAudios: function() {
+      let _this = this;
+      fetch("http://localhost:8080/api/audios?page=0&pagesize=250")
+        .then(response => {
+          response.json().then(res => {
+            _this.Audios = res.data;
+            _this.renderList();
+          });
+        })
+        .catch(err => {
+          console.log("erreur dans le get : " + err);
+        });
+    },
+    renderList(pageNumber = 1) {
+      //clear currently displayed list
+      this.audiosToDisplay = [];
+
+      //set ausdios to display
+      if (this.Audios.length) {
+        let _this = this;
+
+        return new Promise(function(res, rej) {
+          //set the page to open to the pageNumber in the parameter in order to allow start and stop to update accordingly
+          _this.pageToOpen = pageNumber;
+
+          //add the necessary data to `audiosToDisplay` array
+          for (let i = _this.start; i <= _this.stop; i++) {
+            _this.audiosToDisplay.push(_this.Audios[i]);
+          }
+
+          res();
+        })
+          .then(function() {
+            //Now update the current page to the page we just loaded
+            _this.currentPage = _this.pageToOpen;
+          })
+          .catch(function() {
+            console.log("render err");
+          });
+      }
+    },
+
     removeAudio: function(Audio) {
       console.log("--- DELETE AUDIO ---");
       let url = "http://localhost:8080/api/audios/" + Audio._id;
@@ -310,7 +417,7 @@ export default {
       return "#" + id;
     },
     getDetails: function(id) {
-      return "/detailsAudio/"+id;
+      return "/detailsAudio/" + id;
     },
     setdeleteID: function(id) {
       return "del" + id;
