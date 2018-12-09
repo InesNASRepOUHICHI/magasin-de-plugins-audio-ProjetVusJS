@@ -265,7 +265,7 @@ export default {
   },
   mounted() {
     // this.getDataFromServer(
-    //   "http://localhost:8080/api/audios?page=0&pagesize=250"
+    //   "http://localhost:8080/api/audios?page=0&pagesize=3000"
     //  );
   },
   created() {
@@ -338,7 +338,7 @@ export default {
     },
     getAudios: function() {
       let _this = this;
-      fetch("http://localhost:8080/api/audios?page=0&pagesize=250")
+      fetch("http://localhost:8080/api/audios?page=0&pagesize=3000")
         .then(response => {
           response.json().then(res => {
             _this.Audios = res.data;
