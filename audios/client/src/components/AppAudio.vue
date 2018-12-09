@@ -7,16 +7,16 @@
           class="form-control round"
           author="query"
           v-model="filterKey"
-          placeholder="Search"
+          placeholder="Search plugins"
         >
         <div class="form-control-position">
           <i class="ft-search"></i>
         </div>
       </div>
     </form>
-    <div class="row" >
+    <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <label class="control-label" >Show</label>
+        <label class="control-label">Show</label>
         <select class="form-control" v-model="perPage">
           <option value="6">6</option>
           <option value="12">12</option>
@@ -33,7 +33,7 @@
         <div class="card" style="width=200px; height=200px;">
           <h4 class="card-title" align="center">{{Audio.author.name}}</h4>
           <div class="card-body">
-            <div class="card-img"  align="center">
+            <div class="card-img" align="center">
               <a data-toggle="modal" :data-target="getID(setPlayID(Audio._id))">
                 <img
                   style="height:150px; width:auto;"
@@ -63,7 +63,7 @@
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
-                :data-target="getDetails(Audio._id)"
+                :data-target="getID(setDetailsAudio(Audio._id))"
                 style="width: 200px;"
               >DETAILS</a>
               
@@ -199,29 +199,146 @@
             </div>
           </div>
         </div>
-
-        <!-- ************************************ Modal pour jouer une Audio ************************************** -->
+        <!-- ***************************************** Modal pour Detail  Audio *********************************** -->
         <div
           class="modal fade text-left"
           style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-          :id="setPlayID(Audio._id)"
+          :id="setDetailsAudio(Audio._id)"
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel34"
           aria-hidden="true"
         >
-          <!--        <div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <figure>
-                <figcaption>Listen to {{Audio.title}}:</figcaption>
-                <audio controls :src="Audio.brand">
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
-              </figure>
+              <div class="modal-header bg-warning white">
+                <h3 class="modal-title" id="myModalLabel34">Detail Audio</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form>
+                <div class="modal-body">
+                  <table  class="w3-table-all w3-hoverable">
+                    <tr>
+                      <td>
+                        <label>author:</label>
+                      </td>
+                      <td>
+                        {{Audio.author.name}}
+                        <img style="height:50px; width:auto;" :src="Audio.author.avatarUrl">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>brand:</label>
+                      </td>
+                      <td>
+                        {{Audio.brand}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>categories:</label>
+                      </td>
+                      <td>
+                        {{Audio.categories}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>description:</label>
+                      </td>
+                      <td>
+                        {{Audio.description}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>label:</label>
+                      </td>
+                      <td>
+                        {{Audio.label}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>name:</label>
+                      </td>
+                      <td>
+                        {{Audio.name}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>pedalboardCount:</label>
+                      </td>
+                      <td>
+                        {{Audio.pedalboardCount}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>stable:</label>
+                      </td>
+                      <td>
+                       {{Audio.stable}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>uri:</label>
+                      </td>
+                      <td>
+                        <a :href="Audio.uri">Clicker sur ce lien</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>version:</label>
+                      </td>
+                      <td>
+                        {{Audio.version}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>screenshot:</label>
+                      </td>
+                      <td>
+                        <img style="height:50px; width:auto;" :src="Audio.screenshotUrl">
+                      </td>
+                    </tr>
+                  </table>
+
+                  <br/><br/>
+                  <label>Control ports list:</label>
+                  <table align="center" class="w3-table-all w3-hoverable">
+                    <tr>
+                      <td>name</td>
+                      <td>default</td>
+                      <td>max</td>
+                      <td>min</td>
+                    </tr>
+                    <tr v-for="controlPort in Audio.controlPorts">
+                      <td>
+                        {{controlPort.name}}
+                      </td>
+                      <td>
+                        {{controlPort.default}}
+                      </td>
+                      <td>
+                        {{controlPort.max}}
+                      </td>
+                      <td>
+                        {{controlPort.min}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </form>
             </div>
           </div>
-          -->
         </div>
       </div>
     </div>
@@ -414,17 +531,34 @@ export default {
           console.log(err);
         });
     },
+    detailAudio: function(Audio) {
+      console.log("--- DETAIL AUDIO ---");
+      let url = "http://localhost:8080/api/audios/" + Audio._id;
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(Audio)
+      })
+        .then(responseJSON => {
+          console.log("Audio details");
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     getID: function(id) {
       return "#" + id;
-    },
-    getDetails: function(id) {
-      return "/detailsAudio/" + id;
     },
     setdeleteID: function(id) {
       return "del" + id;
     },
     setPlayID: function(id) {
       return "play" + id;
+    },
+    setDetailsAudio: function(id) {
+      return "detail" + id;
     }
   }
 };
