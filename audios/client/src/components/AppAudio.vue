@@ -18,11 +18,12 @@
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <label class="control-label" >Show</label>
         <select class="form-control" v-model="perPage">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+          <option value="6">6</option>
+          <option value="12">12</option>
+          <option value="24">24</option>
+          <option value="48">48</option>
+          <option value="99">99</option>
+          <option value="99999999">ALL</option>
         </select>
       </div>
     </div>
@@ -248,7 +249,7 @@ export default {
     return {
       Audios: [],
       audiosToDisplay: [],
-      perPage: 20,
+      perPage: 12,
       pageToOpen: 1,
       currentPage: 1,
       newAudio: {
