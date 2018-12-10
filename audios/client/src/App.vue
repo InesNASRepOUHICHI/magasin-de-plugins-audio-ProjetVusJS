@@ -1,20 +1,25 @@
 <template>
-  <div id="app">
-    <AppAudio/>
-    <AddAudio/>
-  </div>
+ <b-container id="app">
+    <b-row>
+      <b-col>
+        <navbar/>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <router-view/>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
-import AppAudio from './components/AppAudio'
-import AddAudio from './components/AddAudio'
 
-
+import NavBar from './components/NavBar'
 export default {
   name: 'App',
-  components: {
-    AppAudio,
-    AddAudio
-  }
+  components: { 
+    'Navbar':NavBar
+}
 }
 </script>
 

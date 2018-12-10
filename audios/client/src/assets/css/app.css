@@ -5,6 +5,8 @@
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'bootstrap-vue/dist/bootstrap-vue.css';
 @media print {
   *, *::before, *::after {
     text-shadow : none !important;
@@ -52752,4 +52754,8 @@ Horizontal Timeline
 }
 .main-content .color-palette span.dark {
   color : rgba(0, 0, 0, 0.87);
+}
+
+.error{
+  color :  red; 
 }
