@@ -73,7 +73,7 @@ exports.login = function(req,callback){
 			var password = formData.password;
 			console.log(email);
 			let myquery = {'email':email, 'password':password};
-			console.log("========================");
+
 			db.collection('vendeur')
 		 	  .findOne(myquery ,function (err, data) {
 				let reponse;
@@ -118,22 +118,24 @@ exports.login = function(req,callback){
 exports.addPlugin = function (formData, callback) {
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-
+        formData = formData.formData;
 		if (!err) {
-
 			let toInsert = {
-				vendeur: formData.vendeur,
-				image: formData.image,
-				tag : formData.tag,
-				description: formData.description,
-				buttons: formData.buttons
+
+				author: formData.author,
+				brand:formData.brand,
+				categories:formData.categories,
+				controlPorts:formData.controlPorts,
+                description: formData.description,
+				screenshotUrl: formData.screenshotUrl
+				
 			};
 
-			console.dir(JSON.stringify(toInsert));
-			db.collection("plugins")
+			console.log("dans server");
+			console.log(JSON.stringify(toInsert.controlPorts));
+			db.collection("audios")
 				.insertOne(toInsert, function (err, data) {
 					let reponse;
-					console.log('++++' + data)
 					if (!err) {
 						reponse = {
 							succes: true,

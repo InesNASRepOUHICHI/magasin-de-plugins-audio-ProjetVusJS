@@ -24,7 +24,7 @@ export default new Router({
        path: '/addAudio',
        name: 'Audio',
        component: AddAudio,
-       meta: { requiresAuth: true }
+       //meta: { requiresAuth: true }
     }
 
   ]
