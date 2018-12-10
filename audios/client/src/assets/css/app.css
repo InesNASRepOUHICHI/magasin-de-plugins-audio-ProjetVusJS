@@ -5133,7 +5133,7 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width : 500px;
+    max-width : 700px;
     margin : 30px auto;
   }
   .modal-sm {
@@ -52756,6 +52756,8 @@ Horizontal Timeline
   color : rgba(0, 0, 0, 0.87);
 }
 
+
 .error{
   color :  red; 
 }
+
