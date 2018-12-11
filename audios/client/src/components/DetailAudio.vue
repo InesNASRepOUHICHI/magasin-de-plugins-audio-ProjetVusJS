@@ -2,7 +2,7 @@
   <div
     class="modal fade text-left"
     style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-    id="addAudioForm"
+    id="detailAudioForm"
     tabindex="-1"
     role="dialog"
     aria-labelledby="myModalLabel34"
@@ -11,12 +11,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary white">
-          <h3 class="modal-title" id="myModalLabel34">New Audio</h3>
+          <h3 class="modal-title" id="myModalLabel34">Detail Audio</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form v-on:submit.prevent="addAudio">
+        <form v-on:submit.prevent="DetailAudio">
           <div class="modal-body">
             <label>brand:</label>
             <div class="form-group position-relative has-icon-left">
@@ -25,9 +25,8 @@
                 placeholder="brand"
                 class="form-control"
                 @change="fillFields()"
-                v-model="newAudio.brand"
+                v-model="Audio.brand"
               >
-             
               <div class="form-control-position">
                 <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
               </div>
@@ -39,7 +38,7 @@
                 type="text"
                 placeholder="author"
                 class="form-control"
-                v-model="newAudio.author.name"
+                v-model="Audio.author.name"
               >
               <div class="form-control-position">
                 <i class="fa fa-Audio-camera font-medium-1 line-height-1 text-muted icon-align"></i>
@@ -51,16 +50,13 @@
               <textarea
                 placeholder="Type here ..."
                 class="form-control"
-                v-model="newAudio.description"
+                v-model="Audio.description"
               ></textarea>
               <div class="form-control-position">
                 <i class="fa fa-file-text-o font-medium-1 line-height-1 text-muted icon-align"></i>
               </div>
             </div>
-            <label>Image Plugin:</label>
-           <input class="form-control" type="file" @change="onFileChanged">
-           <button @click="onUpload">Upload image</button>
-           </div>
+          </div>
           <div class="modal-footer">
             <input
               type="reset"
@@ -68,7 +64,7 @@
               data-dismiss="modal"
               value="close"
             >
-            <input type="submit" class="btn btn-outline-primary btn-lg" value="Add">
+            <input type="submit" class="btn btn-outline-primary btn-lg" value="Detail">
           </div>
         </form>
       </div>
@@ -78,24 +74,19 @@
 
 <script>
 export default {
-  name: "AddAudio",
+  name: "detailAudio",
   data() {
     return {
-      newAudio: {
-        _id: "",
-        author: {name: ""},
-        brand: "",
-        description: ""
-      }
+      Audio: {}
     };
   },
   methods: {
-    addAudio: function() {
-      console.log("--- ADD AUDIO ---");
+    detailAudio: function() {
+      console.log("--- Detail AUDIO ---");
 			let url = "http://localhost:8080/api/audios";
-			let data =JSON.stringify(this.newAudio);
+			//let data =JSON.stringify(this.Audio);
       fetch(url, {
-				method: "POST",
+				method: "GET",
 				headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
@@ -103,7 +94,7 @@ export default {
       })
         .then(responseJSON => {
           responseJSON.json().then(res => {
-            alert("Audio ajouté");
+             this.Audio = res.data;;
           });
         })
         .catch(function(err) {

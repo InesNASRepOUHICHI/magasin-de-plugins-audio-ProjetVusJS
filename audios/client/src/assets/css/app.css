@@ -39704,40 +39704,7 @@ ngb-accordion .card {
   }
 }
 
-.email-application {
-  /* .sidebar{
-		width: ($sideber-width)-1;
-	}
-	.content-right{
-		width: calc(100% - 500px);
-	}
-	.app-content, .content-right, .content-wrapper, .content-body{
-	// .sidebar-left, .sidebar, .sidebar-content, .email-app-list-wraper{
-	 	height:100%;
-	 }
-	.content-wrapper{
-		padding: 0 !important;
-	}
-	.sidebar-left{
-		border-right: 1px solid $sideber-border;
-    	z-index: 999;
-	}
-	.chat-fixed-search{
-		position: fixed;
-    	z-index: 999;
-    	background: $white;
-    	width: 291px;    	
-    	padding: 1rem;
-    	fieldset{
-    		border-bottom: 1px solid $sideber-border;
-    	// 	margin: 1rem 0;
-    	}
-	} */
-  /* .users-list-padding{
-		padding-top:83px;
-		padding-bottom: 60px;
-	} */
-}
+
 .email-application .email-app-sidebar {
   background : white;
   position : fixed;
@@ -39861,21 +39828,7 @@ ngb-accordion .card {
   border-bottom : 1px solid #E4E7ED;
 }
 
-/* @include media-breakpoint-down(md) {
-	.email-application .chat-fixed-search,
-	.email-application .email-app-list #users-list{
-		// width: 100%;
-		width: calc(100% - 60px);
-	}
-}
 
-@include media-breakpoint-down(sm) {
-	.email-application .chat-fixed-search,
-	.email-application .email-app-list #users-list{
-		width: 100%;
-		// width: calc(100% - 60px);
-	}
-} */
 @media (min-width: 992px) {
   .email-app-list-mails {
     width : 30% !important;
@@ -52753,4 +52706,24 @@ Horizontal Timeline
 .main-content .color-palette span.dark {
   color : rgba(0, 0, 0, 0.87);
 }
-
+.plugin-category {
+  padding: 5px;
+  background-color: #883996;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-size: .8em;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 5px;
+}
+.divider {
+  display: block;
+  height: 1px;
+  width: 80%;
+  margin: 10px auto;
+  border-bottom: 1px solid #cccccc;
+}
+.search {
+  position: right;
+}
