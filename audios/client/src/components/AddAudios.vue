@@ -1,5 +1,6 @@
 <template>
-   <div id='AddAudio'>
+   <div id='AddAudio' v-if="this.$session.exists()">
+      <navbar/>
       <form>
           <b-form-group  label="Vendeur">
                <b-form-input  type="text" name="avatarUrl" v-model="input.author.avatarUrl" placeholder="Entrez l'url de votre site"/>
@@ -47,8 +48,12 @@
 </template>
 <script>
 import axios from 'axios'
+import NavBar from './NavBar'
 export default {
    name:"AddAudio",
+   components: { 
+            'Navbar':NavBar
+   },
    data(){
       return{
          input:{
@@ -90,6 +95,7 @@ export default {
       addAudio : function(){
          var  url = "http://localhost:8080/api/addPlugin"
         // alert(url)
+        alert(this.$session.exists());
         console.log(this.input);
          console.log(this.input);
                 axios.post(url, {

@@ -2,7 +2,7 @@
  <b-container id="app">
     <b-row>
       <b-col>
-        <navbar/>
+        <!--navbar/-->
       </b-col>
     </b-row>
     <b-row>
@@ -14,11 +14,8 @@
 </template>
 <script>
 
-import NavBar from './components/NavBar'
+
 export default {
-  name: 'App',
-  components: { 
-    'Navbar':NavBar
-}
+  name: 'App'
 }
 </script>

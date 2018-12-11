@@ -113,6 +113,67 @@ exports.login = function(req,callback){
 		}
 	});
 }
+
+//###########################################################################"
+exports.pluginAuthors = function(req,callback){
+	MongoClient.connect(url, function (err, client) {
+		var db = client.db(dbName);
+	    console.log("req " + req.siteUrl)
+		if (!err) {
+			//formData = req.formData;	
+			var urlSite= req.siteUrl;
+			console.log(urlSite)
+			let myquery = {'urlSite':url};
+
+			db.collection('vendeur').aggregate([
+				{
+					$lookup: {
+						from: "audios",
+						localField: "siteUrl",
+						foreignField: "author.avatarUrl",
+						as: "res"
+					}
+				},
+  				{
+     			 $match: { "res": { $ne: [] } }
+   				}
+				]).toArray(	function (err, data) {
+				let reponse;
+				console.log(data);
+				if (!err) {
+					if(data != null ) {
+						reponse = {
+							succes: true,
+							audio: data,
+							error: null,
+							msg: ""
+						}
+				
+					}else{
+						reponse = {
+							succes: false,
+							audio: null,
+							error: err,
+							msg: ""
+						};
+					}
+				} else {
+					reponse = {
+						succes: false,
+						audio: null,
+						error: err,
+						msg: ""
+
+					};
+				}
+				callback(reponse);
+			});
+		}	
+		else {
+			callback(-1);
+		}
+	});
+}
 //#################################################################################
 //Add plugin
 exports.addPlugin = function (formData, callback) {

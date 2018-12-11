@@ -99,6 +99,14 @@ app.post('/api/login',function(req,res)  {
 		res.send(JSON.stringify(data)); 
 	});
 });
+
+//UserPlugin
+app.get('/api/pluginAuthors',function(req,res)  { 
+		
+	mongoDBModule.pluginAuthors(req.body, function(data) {
+		res.send(JSON.stringify(data)); 
+	});
+});
 //
 app.post('/api/addPlugin',function(req,res)  { 
 		

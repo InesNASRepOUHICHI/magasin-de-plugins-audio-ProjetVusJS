@@ -1,4 +1,5 @@
 <template>
+  <div>
   <b-navbar toggleable="md" type="dark" variant="info">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
   <b-navbar-brand href="#">Audio</b-navbar-brand>
@@ -8,13 +9,23 @@
      <b-navbar-nav class="ml-auto">
           <b-nav-item href="/">Home</b-nav-item>
           <!--b-nav-item href="/addAudio">Ajouter un plugin</b-nav-item-->
-          <b-nav-item href="/login">Login</b-nav-item>
+           <b-nav-item v-if="!this.$session.exists()" href="/login">Login</b-nav-item>
+          <b-nav-item v-if="this.$session.exists()" v-on:click="logout()">Logout</b-nav-item>
      </b-navbar-nav>
   </b-collapse>
 </b-navbar>
+</div>
 </template>
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+     logout: function () {
+         this.$session.destroy()
+         this.$router.push('/login')
+                
+       }
+     }
 };
+
 </script>

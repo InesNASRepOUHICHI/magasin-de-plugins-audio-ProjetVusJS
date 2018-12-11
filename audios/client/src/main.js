@@ -13,6 +13,8 @@ require ('./assets/css/app.css')
 require ('./assets/css/vendors/sweetalert2.min.css')
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueSession from 'vue-session'
+Vue.use(VueSession)
 Vue.use(BootstrapVue)
 /* eslint-disable no-new */
 new Vue({

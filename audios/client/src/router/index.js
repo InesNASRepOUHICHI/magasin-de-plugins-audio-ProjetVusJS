@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AppAudio from '@/components/AppAudio'
 import AddAudio from '@/components/AddAudios'
 import Login from '@/components/Login'
+import Author from '@/components/Author'
 
 Vue.use(Router)
 
@@ -25,7 +26,13 @@ export default new Router({
        name: 'Audio',
        component: AddAudio,
        //meta: { requiresAuth: true }
-    }
+    },
+    {
+      path: '/author',
+      name: 'Author',
+      component: Author,
+      //meta: { requiresAuth: true }
+   }
 
   ]
 })
