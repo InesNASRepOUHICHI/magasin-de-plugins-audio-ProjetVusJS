@@ -8,7 +8,7 @@ var assert = require('assert');
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'test1';
+const dbName = 'test';
 
 exports.connexionMongo = function (callback) {
 	MongoClient.connect(url, function (err, client) {
