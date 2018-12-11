@@ -48,8 +48,8 @@ import NavBar from './NavBar'
                       // localStorage.setItem('email', this.input.email)
                       this.$session.start();
                       this.$session.set('jwt', "session");
-                       this.$router.push({name:'Audio'}); 
-                       //this.$router.push({name:'Author'});
+                       //this.$router.push({name:'Audio'}); 
+                       this.$router.push({name:'Author'});
                     }
                 })
                 .catch(e => {

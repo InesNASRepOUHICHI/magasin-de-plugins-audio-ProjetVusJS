@@ -1,6 +1,7 @@
 <template>
-  <div v-if="this.$session.exists()">
-    <form id="search" role="search" style="width: 300px;" align="left" >
+  <div>
+    <navBar/>
+    <form id="search" v-if="this.$session.exists()" role="search" style="width: 300px;" align="left">
       <div class="position-relative has-icon-right">
         <input
           type="text"
@@ -359,9 +360,12 @@
 </template>
 
 <script>
+import NavBar from './NavBar'
 export default {
   author: "AppAudio",
-  components: {},
+  components: {
+    "NavBar":NavBar
+  },
   data() {
     return {
       Audios: [],
@@ -443,7 +447,6 @@ export default {
   methods: {
     getDataFromServer(url) {
       console.log("--- GETTING AUDIOS ---");
-     
       fetch(url)
         .then(response => {
           response.json().then(res => {
@@ -455,12 +458,10 @@ export default {
         });
     },
     getAudios: function() {
-       console.log("dans author   "+this.$session.getAll());
       let _this = this;
       fetch("http://localhost:8080/api/audios?page=0&pagesize=3000")
         .then(response => {
-      let _this = this;
-          response.json().then(res => {  
+          response.json().then(res => {
             _this.Audios = res.data;
             _this.renderList();
           });

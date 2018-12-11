@@ -1,7 +1,7 @@
 <template>
   <div>
-    <form id="search" role="search" style="width: 300px;" 
-    class="search">
+    <navBar/>
+    <form id="search" role="search" style="width: 300px;" align="left">
       <div class="position-relative has-icon-right">
         <input
           type="text"
@@ -367,7 +367,8 @@ import NavBar from './NavBar'
 export default {
   author: "AppAudio",
   components: {
-     'Navbar':NavBar
+     "Navbar":NavBar
+
   },
   data() {
     return {
