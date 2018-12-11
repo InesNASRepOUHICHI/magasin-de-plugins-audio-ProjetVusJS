@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <form id="search" role="search" style="width: 300px;" 
-    class="search">
+  <div v-if="this.$session.exists()">
+    <form id="search" role="search" style="width: 300px;" align="left" >
       <div class="position-relative has-icon-right">
         <input
           type="text"
@@ -44,16 +43,13 @@
                 >
               </a>
             </div>
-            <div v-for="category in Audio.categories"  align="center">
-                  <button class="plugin-category" >{{category}}</button>
-            </div>
-             <div class="divider"></div>
+
             <div class="card-content" style="height :auto ;">
               <a href="#"></a>
               <p class="row mb-1">
                 <small style="padding-left: 40px; padding-top: 5px;"></small>
               </p>
-              <p style="padding-left: 20px;">{{Audio.comment}}</p>
+              <p style="padding-left: 20px;">{{Audio.comment}}.</p>
             </div>
 
             <div class="card-block" style="padding-left: 50px;">
@@ -363,12 +359,9 @@
 </template>
 
 <script>
-import NavBar from './NavBar'
 export default {
   author: "AppAudio",
-  components: {
-     'Navbar':NavBar
-  },
+  components: {},
   data() {
     return {
       Audios: [],
@@ -450,6 +443,7 @@ export default {
   methods: {
     getDataFromServer(url) {
       console.log("--- GETTING AUDIOS ---");
+     
       fetch(url)
         .then(response => {
           response.json().then(res => {
@@ -461,10 +455,12 @@ export default {
         });
     },
     getAudios: function() {
+       console.log("dans author   "+this.$session.getAll());
       let _this = this;
       fetch("http://localhost:8080/api/audios?page=0&pagesize=3000")
         .then(response => {
-          response.json().then(res => {
+      let _this = this;
+          response.json().then(res => {  
             _this.Audios = res.data;
             _this.renderList();
           });

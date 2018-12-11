@@ -85,6 +85,36 @@ app.get('/api/connection', function(req, res) {
    });
 });
 
+//Registration
+app.post('/api/register', multerData.fields([]), function(req, res) {
+ 	mongoDBModule.register(req.body, function(data) {
+ 		res.send(JSON.stringify(data)); 
+ 	});
+});
+
+//Login
+app.post('/api/login',function(req,res)  { 
+		
+	mongoDBModule.login(req.body, function(data) {
+		res.send(JSON.stringify(data)); 
+	});
+});
+
+//UserPlugin
+app.get('/api/pluginAuthors',function(req,res)  { 
+		
+	mongoDBModule.pluginAuthors(req.body, function(data) {
+		res.send(JSON.stringify(data)); 
+	});
+});
+//
+app.post('/api/addPlugin',function(req,res)  { 
+		
+	mongoDBModule.addPlugin(req.body, function(data) {
+		res.send(JSON.stringify(data)); 
+	});
+});
+
 app.get('/api/audios/count', function(req, res) {
     // Pour le moment on simule, mais après on devra
     // réellement se connecte à la base de données
@@ -114,13 +144,14 @@ app.get('/api/audios', function(req, res) {
 
     let title = req.query.title || '';
 
-
  	mongoDBModule.findAudios(page, pagesize, title, function(data,count) {
  		var objdData = {
  			msg:"audio recherchés avec succès",
  			data: data,
 			count:count
- 		}
+		 }
+		 console.log("Test")
+
  		res.send(JSON.stringify(objdData)); 
  	}); 
 });
@@ -168,5 +199,30 @@ app.delete('/api/audios/:id', function(req, res) {
  	mongoDBModule.deleteAudio(id, function(data) {
  		res.send(JSON.stringify(data)); 
  	});
-})
+});
+
+app.get('/api/authors',function(req,res)  { 
+	mongoDBModule.findAuthors(function(data,count) {
+			var objdData = {
+				msg:"audio recherchés avec succès",
+				data: data,
+			   count:count
+			}
+			/*objdData.data.forEach(element => {
+				element.author.password = "";
+				console.log(element.author);
+				mongoDBModule.updateAuthor(element._id,element.author, function(d) {
+					console.log(JSON.stringify(d)); 
+				});
+			});*/
+			res.send(JSON.stringify(objdData)); 
+		}); 
+});
+
+app.post('/api/login',function(req,res)  { 
+		
+	mongoDBModule.login(req, function(data) {
+		res.send(JSON.stringify(data)); 
+	});
+});
 

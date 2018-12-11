@@ -6,112 +6,103 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Audios</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900"
-    rel="stylesheet">
-  <link href="https://pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/app-assets/fonts/font-awesome/css/font-awesome.min.css"
-    rel="stylesheet">
-  <link href="https://pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/app-assets/fonts/feather/style.min.css
-      "
-    rel="stylesheet">
-  <link href="https://pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/app-assets/fonts/simple-line-icons/style.css"
-    rel="stylesheet">
-  <link href="https://pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/app-assets/fonts/font-awesome/css/font-awesome.min.css"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-        .topnav {
-        overflow: hidden;
-        background-color: #333;
-      }
-      
-      .topnav a {
-        float: left;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      
-      .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      
-      .topnav a.active {
-        background-color: #4CAF50;
-        color: white;
-      }
-      </style>
-
 </head>
 
 <body>
-   <div class="topnav">
-      <a>Projet VueJS MBDS</a>
-    <a class="active" href="index.html">Plugin Shop</a>
-    <a href="#" data-toggle="modal" data-target="#addAudioForm">Ajouter un Audio</a>
-    <a data-toggle="modal" data-target="#about">À propos</a>
-  </div>
-  <div style="background-image:url('https://www.moddevices.com/hubfs/assets/billboards/home-billboard.jpg'); height: 610px;">
-    
-    <div style="width:50%;text-align:justify; color:white;">
-    <br/><br/>
-    
-    <h1><b>For all purposes, an entire sonic universe inside</b></h1>
-    <br/><br/>
-      <h2><b>Get access to more than five hundred audio and MIDI plugins in a collection that will never stop growing</b></h2>
-  </div>
+  <div class="container-fluid">
 
-</div>
+    <!--div data-active-color="white" data-background-color="man-of-steel" data-image="https://pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/app-assets/img/sidebar-bg/01.jpg"
+      class="app-sidebar">
 
- 
-  <br/><br/>
-  <div class="wrapper">
+      <div class="sidebar-header">
+        <div class="logo clearfix">
+          <a href="index.html" class="logo-text float-left">
+            <div class="logo-img">
+              <img width="550%" src="https://lh3.googleusercontent.com/-GeZog6cTmYU/UV1Btk9p8pI/AAAAAAAAADI/Azya-tM77eo/w298-h298-n-rw/photo.jpg" />
+            </div>
+            <span class="text align-middle"></span>
+          </a>
+          <a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
+            <i data-toggle="expanded" class="ft-toggle-right toggle-icon"></i>
+          </a>
+          <a id="sidebarClose" href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none">
+            <i class="ft-x"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-container">
+          <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+            <li class=" nav-item">
+              <a href="index.html">
+                <i class="ft-home"></i>
+                <span data-i18n="" class="menu-title">Liste Audios</span>
+              </a>
+            </li>
+            <li class=" nav-item">
+              <a href="#" data-toggle="modal" data-target="#addAudioForm">
+                <i class="ft-droplet"></i>
+                <span data-i18n="" class="menu-title">Ajouter un Audio</span>
+              </a>
+
+              <li class=" nav-item">
+                <a data-toggle="modal" data-target="#about">
+                  <i class="ft-life-buoy"></i>
+                  <span data-i18n="" class="menu-title">À propos</span>
+                </a>
+              </li>
+              <li class=" nav-item">
+                <a href="/login">
+                  <i class="ft-life-buoy"></i>
+                  <span data-i18n="" class="menu-title">Login</span>
+                </a>
+              </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-background"></div>
+
+    </div-->
 
 
-    <div class="main-panel">
 
-      <div>
-        <div>
+     <div class="content">
 
           <div id="app"></div>
 
-        </div>
       </div>
       <footer class="footer footer-static footer-light">
         <p class="clearfix text-muted text-sm-center px-2">
           <span>Copyright &copy; 2018
-            <a href="http://www.mbds-fr.org/" id="mbds" target="_blank" class="text-bold-800 primary darken-2">MBDS </a>,
-            All rights reserved. </span>
+            <a href="http://www.mbds-fr.org/" id="mbds" target="_blank" class="text-bold-800 primary darken-2">MBDS </a>, All rights reserved. </span>
         </p>
       </footer>
 
       <!--****************************************** À propos Modal *************************************************-->
-      <div class="modal fade text-left" style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-        id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+      <!--div class="modal fade text-left" style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel34" aria-hidden="true">
+          <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header bg-info white">
-              <h4 class="modal-title" id="myModalLabel9"><i class="fa fa-tree"></i> ABOUT</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <h4 class="modal-title" id="myModalLabel9"><i class="fa fa-tree"></i> ABOUT</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
             </div>
             <div class="modal-body">
-              <h5><i class="fa fa-lightbulb-o"></i> Projet MBDS Gallerie Audio - Vue.js </h5>
-              <p>Réalisé par <b>Ines NASR</b> & <b>Hawaou DIALLO</b>.</p>
-              <div class="alert alert-success" role="alert">
-                <span class="text-bold-600">Enjoy !</span> :)
-              </div>
+            <h5><i class="fa fa-lightbulb-o"></i> Projet MBDS Gallerie Audio - Vue.js </h5>
+            <p>Réalisé par <b>Ines NASR</b> & <b>Hawaou DIALLO</b>.</p>
+            <div class="alert alert-success" role="alert">
+              <span class="text-bold-600">Enjoy !</span> :)
+            </div>
             </div>
           </div>
-        </div>
-      </div>
+          </div>
+        </div-->
 
-    </div>
   </div>
 
   <!-- built files will be auto injected -->
