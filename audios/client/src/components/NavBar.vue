@@ -7,6 +7,8 @@
     
     <!-- Right aligned nav items -->
      <b-navbar-nav class="ml-auto">
+          <b-nav-item v-if="this.$session.exists()"href="/addAudio" >AddAudio</b-nav-item>
+          <b-nav-item v-if="this.$session.exists()"href="/author" >author</b-nav-item>
           <b-nav-item href="/">Home</b-nav-item>
           <!--b-nav-item href="/addAudio">Ajouter un plugin</b-nav-item-->
            <b-nav-item v-if="!this.$session.exists()" href="/login">Login</b-nav-item>

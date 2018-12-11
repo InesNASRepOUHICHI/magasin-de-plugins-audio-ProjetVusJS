@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navBar/>
     <form id="search" role="search" style="width: 300px;" align="left">
       <div class="position-relative has-icon-right">
         <input
@@ -359,9 +360,12 @@
 </template>
 
 <script>
+import NavBar from './NavBar'
 export default {
   author: "AppAudio",
-  components: {},
+  components: {
+    "NavBar":NavBar
+  },
   data() {
     return {
       Audios: [],
