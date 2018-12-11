@@ -44,13 +44,16 @@
                 >
               </a>
             </div>
-
+            <div v-for="category in Audio.categories"  align="center">
+                  <button class="plugin-category" >{{category}}</button>
+            </div>
+             <div class="divider"></div>
             <div class="card-content" style="height :auto ;">
               <a href="#"></a>
               <p class="row mb-1">
                 <small style="padding-left: 40px; padding-top: 5px;"></small>
               </p>
-              <p style="padding-left: 20px;">{{Audio.comment}}.</p>
+              <p style="padding-left: 20px;">{{Audio.comment}}</p>
             </div>
 
             <div class="card-block" style="padding-left: 50px;">
@@ -364,7 +367,8 @@ import NavBar from './NavBar'
 export default {
   author: "AppAudio",
   components: {
-    "NavBar":NavBar
+     "Navbar":NavBar
+
   },
   data() {
     return {
