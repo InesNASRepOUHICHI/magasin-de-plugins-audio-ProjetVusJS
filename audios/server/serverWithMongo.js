@@ -103,7 +103,7 @@ app.post('/api/login',function(req,res)  {
 //UserPlugin
 app.get('/api/pluginAuthors',function(req,res)  { 
 		
-	mongoDBModule.pluginAuthors(req.body, function(data) {
+	mongoDBModule.pluginAuthors(req, function(data) {
 		res.send(JSON.stringify(data)); 
 	});
 });

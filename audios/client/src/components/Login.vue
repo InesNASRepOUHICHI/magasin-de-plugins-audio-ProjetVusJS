@@ -47,7 +47,7 @@ import NavBar from './NavBar'
                         console.log("dans msg");
                       // localStorage.setItem('email', this.input.email)
                       this.$session.start();
-                      this.$session.set('jwt', "session");
+                      this.$session.set('email', this.input.email);
                        //this.$router.push({name:'Audio'}); 
                        this.$router.push({name:'Author'});
                     }

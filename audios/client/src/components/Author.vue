@@ -30,7 +30,7 @@
     </div>
 
     <div class="row match-height">
-      <div v-for="Audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
+      <div v-for="Audio in audios" class="col-lg-4 col-md-12 col-sm-12">
         <div class="card" style="width=200px; height=200px;">
           <h4 class="card-title" align="center">{{Audio.author.name}}</h4>
           <div class="card-body">
@@ -361,14 +361,16 @@
 
 <script>
 import NavBar from './NavBar'
+import axios from 'axios'
+
 export default {
-  author: "AppAudio",
+  author: "Author",
   components: {
     "NavBar":NavBar
   },
   data() {
     return {
-      Audios: [],
+      audios: [],
       audiosToDisplay: [],
       perPage: 12,
       pageToOpen: 1,
@@ -411,38 +413,39 @@ export default {
     },
     totalPages() {
       //calculate the total number of pages based on the number of items to show per page and the total items we got from server
-      return this.Audios.length && this.Audios.length > this.perPage
+    /*  return this.Audios.length && this.Audios.length > this.perPage
         ? Math.ceil(this.Audios.length / this.perPage)
         : 1;
+        */
     },
 
     start() {
-      return (this.pageToOpen - 1) * this.perPage;
+      //return (this.pageToOpen - 1) * this.perPage;
     },
 
     stop() {
       //stop at the end of the array if array length OR the items left are less than the number of items to show per page
       //do the calculation if otherwise
-      if (this.Audios.length - this.start >= this.perPage) {
+     /* if (this.Audios.length - this.start >= this.perPage) {
         return this.pageToOpen * this.perPage - 1;
       } else {
         return this.Audios.length - 1;
-      }
+      }*/
     },
 
     showNext() {
-      return this.currentPage < this.totalPages;
+     // return this.currentPage < this.totalPages;
     },
 
     showPrev() {
-      return this.currentPage > 1;
+     // return this.currentPage > 1;
     }
   },
   watch: {
     //re-render list based on the value of `perPage` which indicates how many to show per page
-    perPage: function() {
-      this.renderList();
-    }
+   // perPage: function() {
+     // this.renderList();
+   // }
   },
   methods: {
     getDataFromServer(url) {
@@ -450,7 +453,7 @@ export default {
       fetch(url)
         .then(response => {
           response.json().then(res => {
-            this.Audios = res.data;
+            this.Audios = response.data
           });
         })
         .catch(err => {
@@ -459,99 +462,22 @@ export default {
     },
     getAudios: function() {
       let _this = this;
-      fetch("http://localhost:8080/api/audios?page=0&pagesize=3000")
-        .then(response => {
-          response.json().then(res => {
-            _this.Audios = res.data;
-            _this.renderList();
-          });
+      axios.get("http://localhost:8080/api/pluginAuthors",
+        { params : {
+          email: this.$session.get('email')
+        }
+      }).then(response => {
+            this.audios = response.data.audio[0].res;
+            
+            console.log(this.audios.length)
         })
         .catch(err => {
           console.log("erreur dans le get : " + err);
         });
     },
-    renderList(pageNumber = 1) {
-      //clear currently displayed list
-      this.audiosToDisplay = [];
+  
 
-      //set ausdios to display
-      if (this.Audios.length) {
-        let _this = this;
-
-        return new Promise(function(res, rej) {
-          //set the page to open to the pageNumber in the parameter in order to allow start and stop to update accordingly
-          _this.pageToOpen = pageNumber;
-
-          //add the necessary data to `audiosToDisplay` array
-          for (let i = _this.start; i <= _this.stop; i++) {
-            _this.audiosToDisplay.push(_this.Audios[i]);
-          }
-
-          res();
-        })
-          .then(function() {
-            //Now update the current page to the page we just loaded
-            _this.currentPage = _this.pageToOpen;
-          })
-          .catch(function() {
-            console.log("render err");
-          });
-      }
-    },
-
-    removeAudio: function(Audio) {
-      console.log("--- DELETE AUDIO ---");
-      let url = "http://localhost:8080/api/audios/" + Audio._id;
-
-      fetch(url, {
-        method: "DELETE"
-      })
-        .then(responseJSON => {
-          this.Audios.splice(Audio, 1);
-          this.message = "Ce audio a été supprimé";
-          this.showMessage = true;
-          setTimeout(() => {
-            this.showMessage = false;
-          }, 3000);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    editAudio: function(Audio) {
-      console.log("--- UPDATE AUDIO ---");
-      let url = "http://localhost:8080/api/audios/" + Audio._id;
-      fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify(Audio)
-      })
-        .then(responseJSON => {
-          console.log("Audio updated");
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    detailAudio: function(Audio) {
-      console.log("--- DETAIL AUDIO ---");
-      let url = "http://localhost:8080/api/audios/" + Audio._id;
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        },
-        body: JSON.stringify(Audio)
-      })
-        .then(responseJSON => {
-          console.log("Audio details");
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
+    
     getID: function(id) {
       return "#" + id;
     },

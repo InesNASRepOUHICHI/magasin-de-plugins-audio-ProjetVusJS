@@ -71,21 +71,23 @@ exports.login = function(req,callback){
 			formData = req.formData;	
 			var email = formData.email;
 			var password = formData.password;
-			console.log(email);
+			//console.log(email);
 			let myquery = {'email':email, 'password':password};
 
 			db.collection('vendeur')
 		 	  .findOne(myquery ,function (err, data) {
 				let reponse;
-				console.log(data);
+				//console.log(data);
+				
 				if (!err) {
 					if(data != null ) {
 						reponse = {
 							succes: true,
 							audio: data,
 							error: null,
-							msg: "",
-							successRedirect: '/addAudio'
+							msg: ""
+							//successRedirect: '/addAudio'
+
 						}
 				
 					}else{
@@ -118,14 +120,18 @@ exports.login = function(req,callback){
 exports.pluginAuthors = function(req,callback){
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-	    console.log("req " + req.siteUrl)
+		email = req.param('email')
+		console.log(email)	
 		if (!err) {
 			//formData = req.formData;	
 			var urlSite= req.siteUrl;
-			console.log(urlSite)
+			console.log("je uis dans le serveur")
 			let myquery = {'urlSite':url};
 
 			db.collection('vendeur').aggregate([
+				{
+					$match: { "email":email } 
+				 },
 				{
 					$lookup: {
 						from: "audios",
@@ -139,7 +145,7 @@ exports.pluginAuthors = function(req,callback){
    				}
 				]).toArray(	function (err, data) {
 				let reponse;
-				console.log(data);
+				//console.log(data);
 				if (!err) {
 					if(data != null ) {
 						reponse = {

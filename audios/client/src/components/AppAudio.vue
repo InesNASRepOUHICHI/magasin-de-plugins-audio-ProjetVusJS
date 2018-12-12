@@ -9,7 +9,7 @@
           author="query"
           v-model="filterKey"
           placeholder="Search plugins"
-        >
+        >author
         <div class="form-control-position">
           <i class="ft-search"></i>
         </div>
