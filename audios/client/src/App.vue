@@ -1,21 +1,18 @@
 <template>
- <b-container id="app">
-    <b-row>
-      <b-col>
-        <!--navbar/-->
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
+ <div id="app">
         <router-view/>
-      </b-col>
-    </b-row>
-  </b-container>
+ </div>
 </template>
 <script>
 
+import AppAudio from './components/AppAudio'
+
 
 export default {
-  name: 'App'
+  name: 'App',
+ components: {
+    AppAudio,
+   
+  }
 }
 </script>

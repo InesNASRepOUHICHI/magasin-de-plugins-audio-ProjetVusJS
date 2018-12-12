@@ -1,12 +1,13 @@
 <template>
     <div id="Login" v-if="!this.$session.exists()">
         <navbar/>
-        <b-form >
+        <b-form style="text-align:left">
         <p class="error"> {{msg}}</p>
-         <b-form-group>
+         <b-form-group  label="Login :">
+
           <b-form-input type="text" name="email" v-model="input.email" required placeholder="Email"></b-form-input>
          </b-form-group>
-        <b-form-group>
+        <b-form-group  label="Password :">
            <b-form-input type="password" name="password" v-model="input.password" placeholder="Password"> </b-form-input>
         </b-form-group>
            <b-button type="button" v-on:click="login()">Login</b-button>
@@ -48,6 +49,7 @@ import NavBar from './NavBar'
                       // localStorage.setItem('email', this.input.email)
                       this.$session.start();
                       this.$session.set('email', this.input.email);
+					 // console.log("session "+this.$session.get('email'));
                        //this.$router.push({name:'Audio'}); 
                        this.$router.push({name:'Author'});
                     }

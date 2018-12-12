@@ -1,18 +1,44 @@
 <template>
-  <div class="gear-gallery--dark wrapper">
-    <navBar  />
-    <div style="background-image:url('https://www.moddevices.com/hubfs/assets/billboards/home-billboard.jpg'); height: 610px;">
-    <div style="width:50%;text-align:justify; color:white;">
-    <br><br>
-    <h1><b>For all purposes, an entire sonic universe inside</b></h1>
-    <h2><b>Get access to more than five hundred audio and MIDI plugins in a collection that will never stop growing</b></h2>
-  </div>
-</div>
-<div class="accueil">
-  <br><br>
-  <h2 style="text-align: center;">Inspiration in all the Classics</h2>
-<p  class="large" style="text-align: center;">All the famous stompboxes, FX, synths, sequencers and amps that made history</p>
-<br/>
+  <div>
+    <navBar/>
+    <br/>
+    <div class="page-title">
+            <h1>Plugins</h1>
+            <p>Here be plugins</p>
+            <p class="shortline"></p>
+        </div>
+ 
+        <br/> 
+    <form  v-if="this.$session.exists()" role="search" style="width: 700px;left:10px" >
+     <div class="search-container whiteframe" >
+        <input
+          type="text"
+          class="form-control round"
+          author="query"
+          v-model="filterKey"
+          placeholder="Search plugins"
+        >
+       
+        
+          <button type="button" class="feed-search-button">
+                    <img src="/static/images/search.png" alt="Search">
+                </button>
+       
+      </div>
+    </form>
+    <div class="row" >
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3" >
+        <label class="control-label"  >Display All Plugins</label>
+        <select class="form-control" v-model="perPage">
+          <option value="6">6</option>
+          <option value="12">12</option>
+          <option value="24">24</option>
+          <option value="48">48</option>
+          <option value="99">99</option>
+          <option value="99999999">ALL</option>
+        </select>
+      </div>
+    </div>
 
     <div class="row match-height">
       <div v-for="Audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
@@ -29,14 +55,16 @@
                 >
               </a>
             </div>
-
-            <div class="card-content" style="height :auto ;">
-              
-              <span style="color: #666;padding-left: 20px; font-family: Times New Roman"><h5> The brand of this Device is {{Audio.brand}}</h5></span>
+              <div v-for="category in Audio.categories"  align="center">
+                  <button style="vertical-align: top;" class="plugin-category" >{{category}}</button>
             </div>
+             <div class="divider"></div>
 
-            <div class="card-block" style="padding-left: 50px;" align="center">
-          
+
+
+            <div class="card-block" style="padding-left: 50px;">
+            
+              
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
@@ -44,6 +72,131 @@
                 style="width: 200px;"
               >DETAILS</a>
               
+          
+            
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- ***************************************** Modal pour Modifier une  Audio *********************************** -->
+        <div
+          class="modal fade text-left"
+          style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
+          :id="Audio._id"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel34"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-warning white">
+                <h3 class="modal-title" id="myModalLabel34">Edit Audio</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form>
+                <div class="modal-body">
+                  <label>author:</label>
+                  <div class="form-group position-relative has-icon-left">
+                    <input
+                      type="text"
+                      placeholder="author"
+                      class="form-control"
+                      v-model="Audio.author.name"
+                    >
+                    <div class="form-control-position">
+                      <i
+                        class="fa fa-Audio-camera font-medium-1 line-height-1 text-muted icon-align"
+                      ></i>
+                    </div>
+                  </div>
+
+                  <label>brand:</label>
+                  <div class="form-group position-relative has-icon-left">
+                    <input
+                      type="brand"
+                      placeholder="brand"
+                      class="form-control"
+                      v-model="Audio.brand"
+                    >
+                    <div class="form-control-position">
+                      <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
+                    </div>
+                  </div>
+
+                  <label>Description:</label>
+                  <div class="form-group position-relative has-icon-left">
+                    <textarea
+                      placeholder="Type here ..."
+                      class="form-control"
+                      v-model="Audio.description"
+                    ></textarea>
+                    <div class="form-control-position">
+                      <i
+                        class="fa fa-file-text-o font-medium-1 line-height-1 text-muted icon-align"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input
+                    type="reset"
+                    class="btn btn-outline-secondary btn-lg"
+                    data-dismiss="modal"
+                    value="close"
+                  >
+                  <input
+                    type="button"
+                    v-on:click="editAudio(Audio)"
+                    data-dismiss="modal"
+                    class="btn btn-outline-warning btn-lg"
+                    value="Edit"
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ************************************ Modal pour Suppression d'une Audio ************************************** -->
+        <div
+          class="modal fade text-left"
+          style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
+          :id="setdeleteID(Audio._id)"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel34"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div
+                class="swal2-modal swal2-show"
+                style="display: block; width: 500px; padding: 20px; background: rgb(255, 255, 255); min-height: 357px;"
+                tabindex="-1"
+              >
+                <div class="swal2-icon swal2-warning pulse-warning" style="display: block;">!</div>
+
+                <h2>Vous etes sure ?</h2>
+                {{Audio.author}}
+                <div class="swal2-content" style="display: block;">You won't be able to revert this!</div>
+
+                <hr class="swal2-spacer" style="display: block;">
+                <button
+                  v-on:click="removeAudio(Audio)"
+                  data-dismiss="modal"
+                  class="swal2-confirm btn btn-success btn-raised mr-5"
+                  style
+                >Oui, le supprimer!</button>
+                <button
+                  class="swal2-cancel btn btn-danger btn-raised"
+                  data-dismiss="modal"
+                  style="display: inline-block;"
+                >Non, cancel!</button>
+              </div>
             </div>
           </div>
         </div>
@@ -190,13 +343,20 @@
         </div>
       </div>
     </div>
-<p style="text-align: center; color:#17a2b8 ;" class="large">Explore more in the Plugin Shop</p>
-<a href="/pluginShop" class="button">Go to Plugin Shop</a>
-<br/>
-<br/><br/>
+    <div class="text-center">
+      <button
+        class="btn btn-primary btn-xs"
+        v-show="showPrev"
+        @click.stop.prevent="renderList(currentPage-1)"
+      >Prev</button>
+      Page {{currentPage}} of {{totalPages}}
+      <button
+        class="btn btn-primary btn-xs"
+        v-show="showNext"
+        @click.stop.prevent="renderList(currentPage+1)"
+      >Next</button>
+    </div>
   </div>
-  </div>
-
 </template>
 
 <script>
@@ -220,10 +380,12 @@ export default {
         description: "",
         title: "",
         screenshotUrl: ""
-      }
+      },
+      filterKey: ""
     };
   },
   mounted() {
+   
   },
   created() {
     this.getAudios();
@@ -251,9 +413,11 @@ export default {
         ? Math.ceil(this.Audios.length / this.perPage)
         : 1;
     },
+
     start() {
       return (this.pageToOpen - 1) * this.perPage;
     },
+
     stop() {
       //stop at the end of the array if array length OR the items left are less than the number of items to show per page
       //do the calculation if otherwise
@@ -263,9 +427,11 @@ export default {
         return this.Audios.length - 1;
       }
     },
+
     showNext() {
       return this.currentPage < this.totalPages;
     },
+
     showPrev() {
       return this.currentPage > 1;
     }
@@ -305,16 +471,20 @@ export default {
     renderList(pageNumber = 1) {
       //clear currently displayed list
       this.audiosToDisplay = [];
+
       //set ausdios to display
       if (this.Audios.length) {
         let _this = this;
+
         return new Promise(function(res, rej) {
           //set the page to open to the pageNumber in the parameter in order to allow start and stop to update accordingly
           _this.pageToOpen = pageNumber;
+
           //add the necessary data to `audiosToDisplay` array
           for (let i = _this.start; i <= _this.stop; i++) {
             _this.audiosToDisplay.push(_this.Audios[i]);
           }
+
           res();
         })
           .then(function() {
@@ -326,9 +496,11 @@ export default {
           });
       }
     },
+
     removeAudio: function(Audio) {
       console.log("--- DELETE AUDIO ---");
       let url = "http://localhost:8080/api/audios/" + Audio._id;
+
       fetch(url, {
         method: "DELETE"
       })
@@ -393,3 +565,5 @@ export default {
   }
 };
 </script>
+
+

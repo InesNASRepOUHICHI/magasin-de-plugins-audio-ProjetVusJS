@@ -6,7 +6,7 @@ import AppAudio from '@/components/AppAudio'
 import AddAudio from '@/components/AddAudios'
 import Login from '@/components/Login'
 import Author from '@/components/Author'
-
+import PluginShop from '@/components/PluginShop'
 
 Vue.use(Router)
 
@@ -34,7 +34,13 @@ export default new Router({
           name: 'Author',
           component: Author,
           //meta: { requiresAuth: true }
-       }
+       },
+       {
+        path: '/pluginShop',
+        name: 'PluginShop',
+        component: PluginShop,
+        //meta: { requiresAuth: true }
+     }
     
         ,{
             path: '/detailsAudio/:id',

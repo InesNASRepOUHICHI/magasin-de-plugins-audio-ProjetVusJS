@@ -1,8 +1,15 @@
 <template>
   <div>
     <navBar/>
-    <form id="search" v-if="this.$session.exists()" role="search" style="width: 300px;" align="left">
-      <div class="position-relative has-icon-right">
+    <br/>
+    <div class="page-title">
+            <h1> My Plugins</h1>
+            <p class="shortline"></p>
+        </div>
+ 
+        <br/> 
+    <form  v-if="this.$session.exists()" role="search" style="width: 700px;left:10px" >
+     <div class="search-container whiteframe" >
         <input
           type="text"
           class="form-control round"
@@ -10,24 +17,15 @@
           v-model="filterKey"
           placeholder="Search plugins"
         >
-        <div class="form-control-position">
-          <i class="ft-search"></i>
-        </div>
+       
+        
+          <button type="button" class="feed-search-button">
+                    <img src="/static/images/search.png" alt="Search">
+                </button>
+       
       </div>
     </form>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <label class="control-label">Show</label>
-        <select class="form-control" v-model="perPage">
-          <option value="6">6</option>
-          <option value="12">12</option>
-          <option value="24">24</option>
-          <option value="48">48</option>
-          <option value="99">99</option>
-          <option value="99999999">ALL</option>
-        </select>
-      </div>
-    </div>
+
 
     <div class="row match-height">
       <div v-for="Audio in audios" class="col-lg-4 col-md-12 col-sm-12">
@@ -44,14 +42,12 @@
                 >
               </a>
             </div>
-
-            <div class="card-content" style="height :auto ;">
-              <a href="#"></a>
-              <p class="row mb-1">
-                <small style="padding-left: 40px; padding-top: 5px;"></small>
-              </p>
-              <p style="padding-left: 20px;">{{Audio.comment}}.</p>
+              <div v-for="category in Audio.categories"  align="center">
+                  <button style="vertical-align: top;" class="plugin-category" >{{category}}</button>
             </div>
+             <div class="divider"></div>
+
+
 
             <div class="card-block" style="padding-left: 50px;">
               <a
@@ -387,9 +383,7 @@ export default {
     };
   },
   mounted() {
-    // this.getDataFromServer(
-    //   "http://localhost:8080/api/audios?page=0&pagesize=3000"
-    //  );
+   
   },
   created() {
     this.getAudios();
