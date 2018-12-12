@@ -1,18 +1,18 @@
 <template>
- <b-container id="app">
+ <div id="app">
         <router-view/>
-  </b-container>
+ </div>
 </template>
 <script>
 
 import AppAudio from './components/AppAudio'
-import AddAudio from './components/AddAudio'
+
 
 export default {
   name: 'App',
-  components: {
+ components: {
     AppAudio,
-    AddAudio
+   
   }
 }
 </script>

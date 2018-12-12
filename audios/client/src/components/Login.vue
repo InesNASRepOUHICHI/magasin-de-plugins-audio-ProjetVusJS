@@ -1,12 +1,13 @@
 <template>
     <div id="Login" v-if="!this.$session.exists()">
         <navbar/>
-        <b-form >
+        <b-form style="text-align:left">
         <p class="error"> {{msg}}</p>
-         <b-form-group>
+         <b-form-group  label="Login :">
+
           <b-form-input type="text" name="email" v-model="input.email" required placeholder="Email"></b-form-input>
          </b-form-group>
-        <b-form-group>
+        <b-form-group  label="Password :">
            <b-form-input type="password" name="password" v-model="input.password" placeholder="Password"> </b-form-input>
         </b-form-group>
            <b-button type="button" v-on:click="login()">Login</b-button>
