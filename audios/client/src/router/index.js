@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import DetailAudio from '@/components/DetailAudio'
+
 
 import AppAudio from '@/components/AppAudio'
 import AddAudio from '@/components/AddAudios'
@@ -42,11 +42,7 @@ export default new Router({
         //meta: { requiresAuth: true }
      }
     
-        ,{
-            path: '/detailsAudio/:id',
-            name: 'DetailAudio',
-            component: DetailAudio
-        }
+        
        
     ]
 

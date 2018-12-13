@@ -8,11 +8,11 @@
     <!-- Right aligned nav items -->
      <b-navbar-nav class="ml-auto">
           <b-nav-item  style= "font-size:1.5em" href="/">Home</b-nav-item>
-          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()"href="/addAudio" >Add Audio</b-nav-item>
-          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()"href="/author">My Plugins</b-nav-item>
-          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()"href="/pluginShop" >Plugin Shop</b-nav-item>
+          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()" href="/addAudio" >Add Audio</b-nav-item>
+          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()" href="/author">My Plugins</b-nav-item>
+          <b-nav-item  style= "font-size:1.5em" v-if="this.$session.exists()" href="/pluginShop" >Plugin Shop</b-nav-item>
            <b-nav-item style= "font-size:1.5em" v-if="!this.$session.exists()" href="/login">Login</b-nav-item>
-           <b-nav-item style= "font-size:1.5em"v-if="this.$session.exists()" v-on:click="logout()">Logout</b-nav-item>
+           <b-nav-item style= "font-size:1.5em" v-if="this.$session.exists()" v-on:click="logout()">Logout</b-nav-item>
      </b-navbar-nav>
   </b-collapse>
 </b-navbar>

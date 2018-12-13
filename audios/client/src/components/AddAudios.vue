@@ -5,10 +5,10 @@
           <b-form-group  label="Vendeur :" >
                <b-form-input  type="text" name="avatarUrl" v-model="input.author.avatarUrl" placeholder="Entrez l'url de votre site"/>
          </b-form-group>
-          <b-form-group  label="nom :">
+          <b-form-group  label="Nom :">
                <b-form-input  type="text" name="name" v-model="input.author.name" placeholder="Entrez l'url de votre site"/>
          </b-form-group>
-          <b-form-group  label="marque :">
+          <b-form-group  label="Marque :">
                <b-form-input  type="text" name="brand" v-model="input.brand" placeholder="Entrez le nom de votre marque"/>
          </b-form-group>
          <b-form-group label="Tag :">
