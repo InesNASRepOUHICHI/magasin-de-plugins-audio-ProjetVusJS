@@ -75,9 +75,11 @@ Le Serveur est lancé sur le port : **8080**
 
 On a utilisé la base de données Mongo DB 
 
-Le fichier Json des vendeurs : lien 
+Le fichier Json des vendeurs : [lien](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/server/vendeur.json)
+      
 
-Le fichier Json des plugins audios : lien
+Le fichier Json des plugins audios : [lien](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/server/audios.json)
+      
 
 Une jointure est faite entre les deux bases de données pour permettre à un vendeur d’afficher que ces propres plugins et d’ajouter son propre plugin.
 
