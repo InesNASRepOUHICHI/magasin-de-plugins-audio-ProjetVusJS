@@ -1,13 +1,13 @@
 { 
     "_id" : ObjectId("5c0eac56e33fbd2c1883ccc4"), 
-    "email" : "test10@gmail.com", 
+    "email" : "test@gmail.com", 
     "password" : "test", 
     "siteUrl" : "https://www.gravatar.com/avatar/none", 
     "Nom" : "Hawa"
 }
 { 
     "_id" : ObjectId("5c0d6455dda47c4ea0243414"), 
-    "email" : "test@gmail.com", 
+    "email" : "test10@gmail.com", 
     "password" : "test", 
     "siteUrl" : "https://donafrica.com", 
     "Nom" : "Hawa"
