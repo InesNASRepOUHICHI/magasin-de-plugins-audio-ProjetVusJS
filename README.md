@@ -42,6 +42,7 @@ yarn
 ```
 
 *********************** Coté Client ******************
+
 La Commande pour exécuter la partie client
 
 ```
@@ -55,9 +56,13 @@ Les vendeurs des audios peuvent se connecter à notre plateforme à travers ce l
 Un vendeur connecté (authentifié) peut ajouter des audios et les gérer (modifier / supprimer).
 
 Exemple de compte de test: 
+
 **Login:** Test@gmail.com
+
 **Password**: test
+
 *********************** Coté Serveur ******************
+
 La Commande pour exécuter la partie serveur
 
 ```
@@ -65,12 +70,18 @@ $ npm start
 ```
 
 Le Serveur est lancé sur le port : **8080**
+
 **Mongo Database:**
+
 On a utilisé la base de données Mongo DB 
+
 Le fichier Json des vendeurs : lien 
+
 Le fichier Json des plugins audios : lien
+
 Une jointure est faite entre les deux bases de données pour permettre à un vendeur d’afficher que ces propres plugins et d’ajouter son propre plugin.
-Captures d’écrans :
+
+**Captures d’écrans :**
 
 **Page d'authentification**
 Un utilisateur doit s’authentifier pour accéder à la plateforme.
@@ -91,6 +102,7 @@ Dans cette page, on peut chercher tous les plugins existants, naviguer entre les
 
 **Mes Plugins**
 Cette page contient les plugins que l’utilisateur connecté a ajoutés.
+
 Il peut afficher les détails d’un plugin. En cliquant sur le bouton « Détails », un modèle des détails est affiché.
 
 Il peut modifier un plugin. En cliquant sur le bouton « Edit », un formulaire de modification est affiché.
@@ -140,6 +152,7 @@ Il peut ajouter un nouveau plugin en cliquant sur le lien « Add new Audio » da
 ```
 
 Contenu des fichiers coté client :
+
 - **AppAudio :** composant VueJS qui gère la construction de la page d’accueil où n’importe quel visiteur peut voir la liste des plugins existants.
 
 - **PluginShop :** composant VueJS responsable de la présentation du catalogue des plugins. Un visiteur peut chercher un plugin. Il peut aussi définir le nombre maximum de plugins à afficher par page et naviguer entre les différentes pages.
@@ -165,6 +178,7 @@ Contenu des fichiers coté server :
 
 
 **Structure d’un Plugin** 	
+
 - L'audio est composé de :
 ```
       -author : {
@@ -187,4 +201,4 @@ Contenu des fichiers coté server :
       -version : version du plugin
     } 
     
-    ```
+
