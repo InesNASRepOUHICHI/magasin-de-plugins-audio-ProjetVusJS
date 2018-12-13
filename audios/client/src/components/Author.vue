@@ -39,8 +39,7 @@
                 >
               </a>
             </div>
-              <div v-for="category in audio.res.categories"  align="center">
-            </div>
+             
              <div class="divider"></div>
             <div class="card-block" style="padding-left: 50px;">
               <a
@@ -89,7 +88,7 @@
               </div>
               <form>
                 <div class="modal-body">
-                  <label>author:</label>
+                  <label>Author:</label>
                   <div class="form-group position-relative has-icon-left">
                     <input
                       type="text"
@@ -104,7 +103,7 @@
                     </div>
                   </div>
 
-                  <label>brand:</label>
+                  <label>Brand:</label>
                   <div class="form-group position-relative has-icon-left">
                     <input
                       type="brand"
@@ -213,7 +212,7 @@
                   <table  class="w3-table-all w3-hoverable">
                     <tr>
                       <td>
-                        <label>author:</label>
+                        <label>Author:</label>
                       </td>
                       <td>
                         {{audio.res.author.name}}
@@ -222,7 +221,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>brand:</label>
+                        <label>Brand:</label>
                       </td>
                       <td>
                         {{audio.res.brand}}
@@ -230,7 +229,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>categories:</label>
+                        <label>Categories:</label>
                       </td>
                       <td>
                         {{audio.categories}}
@@ -238,7 +237,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>description:</label>
+                        <label>Description:</label>
                       </td>
                       <td>
                         {{audio.res.description}}
@@ -246,7 +245,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>label:</label>
+                        <label>Label:</label>
                       </td>
                       <td>
                         {{audio.res.label}}
@@ -254,7 +253,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>name:</label>
+                        <label>Name:</label>
                       </td>
                       <td>
                         {{audio.res.name}}
@@ -262,7 +261,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>pedalboardCount:</label>
+                        <label>PedalboardCount:</label>
                       </td>
                       <td>
                         {{audio.res.pedalboardCount}}
@@ -270,7 +269,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>stable:</label>
+                        <label>Stable:</label>
                       </td>
                       <td>
                        {{audio.res.stable}}
@@ -278,7 +277,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>uri:</label>
+                        <label>Uri:</label>
                       </td>
                       <td>
                         <a :href="audio.res.uri">Clicker sur ce lien</a>
@@ -286,7 +285,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>version:</label>
+                        <label>Version:</label>
                       </td>remaincalm.
                       <td>
                         {{audio.res.version}}
@@ -294,7 +293,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label>screenshot:</label>
+                        <label>Screenshot:</label>
                       </td>
                       <td>
                         <img style="height:50px; width:auto;" :src="audio.res.screenshotUrl">
@@ -306,12 +305,12 @@
                   <label>Control ports list:</label>
                   <table align="center" class="w3-table-all w3-hoverable">
                     <tr>
-                      <td>name</td>
-                      <td>default</td>
-                      <td>max</td>
-                      <td>min</td>
+                      <td>Name</td>
+                      <td>Default</td>
+                      <td>Max</td>
+                      <td>Min</td>
                     </tr>
-                    <tr v-for="controlPort in audio.res.controlPorts">
+                    <tr v-for="controlPort in audio.res.controlPorts" :key="controlPort.id">
                       <td>
                         {{controlPort.name}}
                       </td>
@@ -506,6 +505,7 @@ export default {
       console.log("--- DELETE AUDIO ---");
       let url = "http://localhost:8080/api/audios/"+ audio.res._id;
      console.log(audio.res._id);
+
       fetch(url, {
         method: "DELETE"
       })

@@ -80,7 +80,6 @@ exports.login = function(req,callback){
 							audio: data,
 							error: null,
 							msg: ""
-							//successRedirect: '/addAudio'
 
 						}
 				

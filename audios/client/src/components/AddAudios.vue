@@ -5,20 +5,14 @@
           <b-form-group  label="Vendeur :" >
                <b-form-input  type="text" name="avatarUrl" v-model="input.author.avatarUrl" placeholder="Entrez l'url de votre site"/>
          </b-form-group>
-          <b-form-group  label="nom :">
+          <b-form-group  label="Nom :">
                <b-form-input  type="text" name="name" v-model="input.author.name" placeholder="Entrez l'url de votre site"/>
          </b-form-group>
-          <b-form-group  label="marque :">
+          <b-form-group  label="Marque :">
                <b-form-input  type="text" name="brand" v-model="input.brand" placeholder="Entrez le nom de votre marque"/>
          </b-form-group>
          <b-form-group label="Tag :">
             <b-form-input type="text" name="categories" v-model="input.categories" placeholder="Entrez votre tag"/>
-         </b-form-group>
-         <b-form-group label="Label :">
-            <b-form-input type="text" name="label" v-model="input.label" placeholder="Entrez votre tag"/>
-         </b-form-group>
-         <b-form-group label="Name :">
-            <b-form-input type="text" name="name" v-model="input.name" placeholder="Entrez le nom"/>
          </b-form-group>
          <b-form-group label="Image :">
             <b-form-input type="text" name="screenshotUrl" v-model="input.screenshotUrl" placeholder="Entrez l'url de votre image"/>
@@ -75,8 +69,6 @@ export default {
                }
             ],
             description:"",
-            label:"",
-            name:"",
             screenshotUrl:""
          }
       }
