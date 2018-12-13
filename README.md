@@ -104,6 +104,7 @@ Dans cette page, on peut chercher tous les plugins existants, naviguer entre les
 
 
 **Mes Plugins**
+
 Cette page contient les plugins que l’utilisateur connecté a ajoutés.
 
 Il peut afficher les détails d’un plugin. En cliquant sur le bouton « Détails », un modèle des détails est affiché.
