@@ -21,28 +21,25 @@
         
           <button type="button" class="feed-search-button">
                     <img src="/static/images/search.png" alt="Search">
-                </button>
-       
+                </button>       
       </div>
     </form>
-
-
     <div class="row match-height">
-      <div v-for="Audio in audios" class="col-lg-4 col-md-12 col-sm-12">
+      <div v-for="Audio in this.audios" class="col-lg-4 col-md-12 col-sm-12">
         <div class="card" style="width=200px; height=200px;">
-          <h4 class="card-title" align="center">{{Audio.author.name}}</h4>
+          <h4 class="card-title" align="center">{{Audio.res.author.name}}</h4>
           <div class="card-body">
             <div class="card-img" align="center">
               <a data-toggle="modal" :data-target="getID(setPlayID(Audio._id))">
                 <img
                   style="height:150px; width:auto;"
                   class="card-img-top img-fluid"
-                  :src="Audio.screenshotUrl"
+                  :src="Audio.res.screenshotUrl"
                   alt="Card image cap"
                 >
               </a>
             </div>
-              <div v-for="category in Audio.categories"  align="center">
+              <div v-for="category in Audio.res.categories"  align="center">
                   <button style="vertical-align: top;" class="plugin-category" >{{category}}</button>
             </div>
              <div class="divider"></div>
@@ -101,7 +98,7 @@
                       type="text"
                       placeholder="author"
                       class="form-control"
-                      v-model="Audio.author.name"
+                      v-model="Audio.res.author.name"
                     >
                     <div class="form-control-position">
                       <i
@@ -116,7 +113,7 @@
                       type="brand"
                       placeholder="brand"
                       class="form-control"
-                      v-model="Audio.brand"
+                      v-model="Audio.res.brand"
                     >
                     <div class="form-control-position">
                       <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
@@ -128,7 +125,7 @@
                     <textarea
                       placeholder="Type here ..."
                       class="form-control"
-                      v-model="Audio.description"
+                      v-model="Audio.res.description"
                     ></textarea>
                     <div class="form-control-position">
                       <i
@@ -177,7 +174,7 @@
                 <div class="swal2-icon swal2-warning pulse-warning" style="display: block;">!</div>
 
                 <h2>Vous etes sure ?</h2>
-                {{Audio.author}}
+                {{Audio.res.author}}
                 <div class="swal2-content" style="display: block;">You won't be able to revert this!</div>
 
                 <hr class="swal2-spacer" style="display: block;">
@@ -222,8 +219,8 @@
                         <label>author:</label>
                       </td>
                       <td>
-                        {{Audio.author.name}}
-                        <img style="height:50px; width:auto;" :src="Audio.author.avatarUrl">
+                        {{Audio.res.author.name}}
+                        <img style="height:50px; width:auto;" :src="Audio.res.author.avatarUrl">
                       </td>
                     </tr>
                     <tr>
@@ -231,7 +228,7 @@
                         <label>brand:</label>
                       </td>
                       <td>
-                        {{Audio.brand}}
+                        {{Audio.res.brand}}
                       </td>
                     </tr>
                     <tr>
@@ -247,7 +244,7 @@
                         <label>description:</label>
                       </td>
                       <td>
-                        {{Audio.description}}
+                        {{Audio.res.description}}
                       </td>
                     </tr>
                     <tr>
@@ -255,7 +252,7 @@
                         <label>label:</label>
                       </td>
                       <td>
-                        {{Audio.label}}
+                        {{Audio.res.label}}
                       </td>
                     </tr>
                     <tr>
@@ -263,7 +260,7 @@
                         <label>name:</label>
                       </td>
                       <td>
-                        {{Audio.name}}
+                        {{Audio.res.name}}
                       </td>
                     </tr>
                     <tr>
@@ -271,7 +268,7 @@
                         <label>pedalboardCount:</label>
                       </td>
                       <td>
-                        {{Audio.pedalboardCount}}
+                        {{Audio.res.pedalboardCount}}
                       </td>
                     </tr>
                     <tr>
@@ -279,7 +276,7 @@
                         <label>stable:</label>
                       </td>
                       <td>
-                       {{Audio.stable}}
+                       {{Audio.res.stable}}
                       </td>
                     </tr>
                     <tr>
@@ -287,15 +284,15 @@
                         <label>uri:</label>
                       </td>
                       <td>
-                        <a :href="Audio.uri">Clicker sur ce lien</a>
+                        <a :href="Audio.res.uri">Clicker sur ce lien</a>
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <label>version:</label>
-                      </td>
+                      </td>remaincalm.
                       <td>
-                        {{Audio.version}}
+                        {{Audio.res.version}}
                       </td>
                     </tr>
                     <tr>
@@ -303,7 +300,7 @@
                         <label>screenshot:</label>
                       </td>
                       <td>
-                        <img style="height:50px; width:auto;" :src="Audio.screenshotUrl">
+                        <img style="height:50px; width:auto;" :src="Audio.res.screenshotUrl">
                       </td>
                     </tr>
                   </table>
@@ -317,7 +314,7 @@
                       <td>max</td>
                       <td>min</td>
                     </tr>
-                    <tr v-for="controlPort in Audio.controlPorts">
+                    <tr v-for="controlPort in Audio.res.controlPorts">
                       <td>
                         {{controlPort.name}}
                       </td>
@@ -368,7 +365,7 @@ export default {
     return {
       audios: [],
       audiosToDisplay: [],
-      perPage: 12,
+      perPage: 3,
       pageToOpen: 1,
       currentPage: 1,
       newAudio: {
@@ -407,39 +404,38 @@ export default {
     },
     totalPages() {
       //calculate the total number of pages based on the number of items to show per page and the total items we got from server
-    /*  return this.Audios.length && this.Audios.length > this.perPage
-        ? Math.ceil(this.Audios.length / this.perPage)
+     return this.audios.length && this.audios.length > this.perPage
+        ? Math.ceil(this.audios.length / this.perPage)
         : 1;
-        */
     },
 
     start() {
-      //return (this.pageToOpen - 1) * this.perPage;
+      return (this.pageToOpen - 1) * this.perPage;
     },
 
     stop() {
       //stop at the end of the array if array length OR the items left are less than the number of items to show per page
       //do the calculation if otherwise
-     /* if (this.Audios.length - this.start >= this.perPage) {
+     if (this.audios.length - this.start >= this.perPage) {
         return this.pageToOpen * this.perPage - 1;
       } else {
-        return this.Audios.length - 1;
-      }*/
+        return this.audios.length - 1;
+      }
     },
 
     showNext() {
-     // return this.currentPage < this.totalPages;
+     return this.currentPage < this.totalPages;
     },
 
     showPrev() {
-     // return this.currentPage > 1;
+       return this.currentPage > 1;
     }
   },
   watch: {
     //re-render list based on the value of `perPage` which indicates how many to show per page
-   // perPage: function() {
-     // this.renderList();
-   // }
+     perPage: function() {
+     this.renderList();
+    }
   },
   methods: {
     getDataFromServer(url) {
@@ -447,7 +443,8 @@ export default {
       fetch(url)
         .then(response => {
           response.json().then(res => {
-            this.Audios = response.data
+            this.audios = response.data
+            console.log(this.audios);
           });
         })
         .catch(err => {
@@ -461,17 +458,13 @@ export default {
           email: this.$session.get('email')
         }
       }).then(response => {
-            this.audios = response.data.audio[0].res;
-            
-            console.log(this.audios.length)
+         _this.audios = response.data.audio;
+         _this.renderList();
         })
         .catch(err => {
           console.log("erreur dans le get : " + err);
         });
     },
-  
-
-    
     getID: function(id) {
       return "#" + id;
     },
@@ -483,7 +476,57 @@ export default {
     },
     setDetailsAudio: function(id) {
       return "detail" + id;
+    },
+     renderList(pageNumber = 1) {
+      //clear currently displayed list
+      this.audiosToDisplay = [];
+
+      //set ausdios to display
+      if (this.audios.length) {
+        let _this = this;
+
+        return new Promise(function(res, rej) {
+          //set the page to open to the pageNumber in the parameter in order to allow start and stop to update accordingly
+          _this.pageToOpen = pageNumber;
+
+          //add the necessary data to `audiosToDisplay` array
+          for (let i = _this.start; i <= _this.stop; i++) {
+            _this.audiosToDisplay.push(_this.audios[i]);
+          }
+
+          res();
+        })
+          .then(function() {
+            //Now update the current page to the page we just loaded
+            _this.currentPage = _this.pageToOpen;
+          })
+          .catch(function() {
+            console.log("render err");
+          });
+      }
+    },
+     removeAudio: function(Audio) {
+      console.log("--- DELETE AUDIO ---");
+      let url = "http://localhost:8080/api/audios/"+ Audio._id;
+     console.log(Audio);
+      fetch(url, {
+        method: "DELETE"
+      })
+        .then(responseJSON => {
+          console.log(responseJSON)
+        
+          //this.Audios.splice(idx, 1);
+          //alert("Ce audio a été supprimé");
+          //this.showMessage = true;
+         // window.location.reload(true)
+         
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
+    
+
   }
 };
 </script>

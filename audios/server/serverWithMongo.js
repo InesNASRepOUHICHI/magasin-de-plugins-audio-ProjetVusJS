@@ -102,8 +102,12 @@ app.post('/api/login',function(req,res)  {
 
 //UserPlugin
 app.get('/api/pluginAuthors',function(req,res)  { 
-		
-	mongoDBModule.pluginAuthors(req, function(data) {
+	let page = parseInt(req.query.page || 1);
+    // idem si present on prend la valeur, sinon 10
+    let pagesize = parseInt(req.query.pagesize || 10);
+
+    let title = req.query.title || '';	
+	mongoDBModule.pluginAuthors(page, pagesize, title,req, function(data) {
 		res.send(JSON.stringify(data)); 
 	});
 });
@@ -195,8 +199,8 @@ app.put('/api/audios/:id', multerData.fields([]), function(req, res) {
 // c'est le standard REST
 app.delete('/api/audios/:id', function(req, res) {
 	var id = req.params.id;
-
  	mongoDBModule.deleteAudio(id, function(data) {
+		// console.log(data.data)
  		res.send(JSON.stringify(data)); 
  	});
 });

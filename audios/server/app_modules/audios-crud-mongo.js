@@ -30,11 +30,9 @@ exports.register = function (formData, callback) {
 				siteUrl: formData.siteUrl,
 				Nom : formData.Nom
 			}
-			console.log(toInsert);
 			db.collection("vendeur")
 				.insertOne(toInsert, function (err, data) {
 					let reponse;
-					console.log('++++' + data)
 					if (!err) {
 						reponse = {
 							succes: true,
@@ -66,19 +64,15 @@ exports.register = function (formData, callback) {
 exports.login = function(req,callback){
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-	//	console.log("db " + db)
 		if (!err) {
 			formData = req.formData;	
 			var email = formData.email;
 			var password = formData.password;
-			//console.log(email);
 			let myquery = {'email':email, 'password':password};
 
 			db.collection('vendeur')
 		 	  .findOne(myquery ,function (err, data) {
 				let reponse;
-				//console.log(data);
-				
 				if (!err) {
 					if(data != null ) {
 						reponse = {
@@ -117,15 +111,13 @@ exports.login = function(req,callback){
 }
 
 //###########################################################################"
-exports.pluginAuthors = function(req,callback){
+exports.pluginAuthors = function(page, pagesize, title, req,callback){
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-		email = req.param('email')
-		console.log(email)	
+		email = req.param('email')	
 		if (!err) {
 			//formData = req.formData;	
 			var urlSite= req.siteUrl;
-			console.log("je uis dans le serveur")
 			let myquery = {'urlSite':url};
 
 			db.collection('vendeur').aggregate([
@@ -143,9 +135,13 @@ exports.pluginAuthors = function(req,callback){
   				{
      			 $match: { "res": { $ne: [] } }
    				}
-				]).toArray(	function (err, data) {
+				]).unwind("$res")
+				.skip(page * pagesize)
+				.limit(pagesize).
+				toArray(	function (err, data) {
 				let reponse;
-				//console.log(data);
+				//console.log("dans serve")
+				//console.log(data)
 				if (!err) {
 					if(data != null ) {
 						reponse = {
@@ -197,9 +193,6 @@ exports.addPlugin = function (formData, callback) {
 				screenshotUrl: formData.screenshotUrl
 				
 			};
-
-			console.log("dans server");
-			console.log(JSON.stringify(toInsert.controlPorts));
 			db.collection("audios")
 				.insertOne(toInsert, function (err, data) {
 					let reponse;
@@ -233,8 +226,6 @@ exports.addPlugin = function (formData, callback) {
 exports.countAudios = function (title, callback) {
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-
-		console.log("db " + db)
 		if (!err) {
 			if (title == '') {
 				db.collection('audios')
@@ -258,8 +249,6 @@ exports.findAudios = function (page, pagesize, title, callback) {
 	MongoClient.connect(url, function (err, client) {
 
 		var db = client.db(dbName);
-
-		console.log("db " + db)
 		if (!err) {
 			if (title == '') {
 				db.collection('audios')
@@ -349,13 +338,10 @@ exports.createAudio = function (formData, callback) {
 				description: formData.description,
 				author: formData.author
 			};
-			console.dir(JSON.stringify(toInsert));
+			//console.dir(JSON.stringify(toInsert));
 			db.collection("audios")
 				.insert(toInsert, function (err, insertedId) {
 					let reponse;
-
-					console.log('++++' + insertedId)
-
 					if (!err) {
 						reponse = {
 							succes: true,
@@ -437,13 +423,13 @@ exports.updateAudio = function (id, formData, callback) {
 	});
 }
 
-exports.deleteAudio = function (_id, callback) {
+exports.deleteAudio = function (id, callback) {
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-
+        
 		if (!err) {
-			let myquery = { "_id": ObjectId(_id) };
-
+			let myquery = { _id: ObjectId(id) };
+		
 			db.collection("audios")
 				.deleteOne(myquery, function (err, result) {
 					if (!err) {
@@ -453,6 +439,7 @@ exports.deleteAudio = function (_id, callback) {
 							error: null,
 							msg: "Suppression réussie " + result
 						};
+						
 					} else {
 						reponse = {
 							succes: false,
@@ -519,7 +506,6 @@ exports.findAudioById = function (_id, callback) {
 exports.findAuthors = function(callback){
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
-		console.log("db " + db)
 		if (!err) {
 			db.collection('audios')
 				.distinct("author")
@@ -537,8 +523,6 @@ exports.findAuthors = function(callback){
 
 
 exports.updateAuthor = function(_id,formData, callback) {
-
-	console.log(formData)
 	MongoClient.connect(url, function (err, client) {
 		var db = client.db(dbName);
 

@@ -39,9 +39,6 @@
           <b-form-group label="Description :">
             <b-form-input type="text" name="description" v-model="input.description" placeholder="Entrez votre description"/>
          </b-form-group>
-         <b-form-group label="Image :">
-            <b-form-input type="text" name="screenshotUrl" v-model="input.screenshotUrl" placeholder="Entrez l'url de votre image"/>
-         </b-form-group>
          <button type="button" v-on:click="addAudio() ">Ajouter</button>
          <button type="button"><a href="/author">Annuler</a></button>
       </form>
@@ -95,8 +92,6 @@ export default {
    methods:{
       addAudio : function(){
          var  url = "http://localhost:8080/api/addPlugin"
-        // alert(url)
-        alert(this.$session.exists());
         console.log(this.input);
          console.log(this.input);
                 axios.post(url, {
