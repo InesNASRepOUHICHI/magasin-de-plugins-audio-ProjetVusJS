@@ -84,10 +84,12 @@ Une jointure est faite entre les deux bases de données pour permettre à un ven
 **Captures d’écrans :**
 
 **Page d'authentification**
+
 Un utilisateur doit s’authentifier pour accéder à la plateforme.
 
 
 **Page d'accueil**
+
 Cette page contient tous les plugins disponibles :
 
 
@@ -96,6 +98,7 @@ Si on scrolle on voit le catalogue des plugins disponibles :
 En cliquant sur le bouton **« Go To Plugins Shop »** en bas de la page, on peut voir tous les plugins.
 
 **Plugins Shop**
+
 Dans cette page, on peut chercher tous les plugins existants, naviguer entre les pages de plugins et choisir combien de page on veut afficher. L’utilisateur peut aussi voir le détail de chaque audio.
 
 
@@ -151,7 +154,7 @@ Il peut ajouter un nouveau plugin en cliquant sur le lien « Add new Audio » da
 |   +---vendeur.json
 ```
 
-Contenu des fichiers coté client :
+**Contenu des fichiers coté client :**
 
 - **AppAudio :** composant VueJS qui gère la construction de la page d’accueil où n’importe quel visiteur peut voir la liste des plugins existants.
 
