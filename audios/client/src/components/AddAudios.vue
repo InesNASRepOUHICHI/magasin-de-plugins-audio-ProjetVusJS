@@ -14,8 +14,14 @@
          <b-form-group label="Tag :">
             <b-form-input type="text" name="categories" v-model="input.categories" placeholder="Entrez votre tag"/>
          </b-form-group>
+         <b-form-group label="Label :">
+            <b-form-input type="text" name="label" v-model="input.label" placeholder="Entrez votre tag"/>
+         </b-form-group>
+         <b-form-group label="Name :">
+            <b-form-input type="text" name="name" v-model="input.name" placeholder="Entrez le nom"/>
+         </b-form-group>
          <b-form-group label="Image :">
-            <b-form-input type="text" name="image" v-model="input.image" placeholder="Entrez l'url de votre image"/>
+            <b-form-input type="text" name="screenshotUrl" v-model="input.screenshotUrl" placeholder="Entrez l'url de votre image"/>
          </b-form-group>
          <b-form-group label="Détail des paramètres :">
             <table border="1">
@@ -40,7 +46,6 @@
             <b-form-input type="text" name="description" v-model="input.description" placeholder="Entrez votre description"/>
          </b-form-group>
          <button type="button" v-on:click="addAudio() ">Ajouter</button>
-         <button type="button"><a href="/author">Annuler</a></button>
       </form>
    </div>
 </template>
@@ -70,39 +75,23 @@ export default {
                }
             ],
             description:"",
+            label:"",
+            name:"",
             screenshotUrl:""
-         }
-         ,
-         inputs :{
-            vendeur:"",
-            image:"",
-            tag:"",
-            description:"",
-            buttons:[
-               {
-                  nomButton:"",
-                  defaultValue   :"",
-                  min:"",
-                  max:""
-               }
-            ]
          }
       }
    },
    methods:{
       addAudio : function(){
          var  url = "http://localhost:8080/api/addPlugin"
-        console.log(this.input);
-         console.log(this.input);
                 axios.post(url, {
                     formData: this.input
                 })
                 .then(response => { 
                     this.msg =  response.data.msg;
-                    if(this.msg===""){
-                        console.log("dans msg");
-                      this.$router.push({name:'Audio'}); 
-                    }
+                   
+                      this.$router.push({name:'Author'}); 
+                    
                 })
                 .catch(e => {
                     console.log(e)

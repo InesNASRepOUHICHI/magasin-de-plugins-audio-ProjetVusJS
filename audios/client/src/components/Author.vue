@@ -25,46 +25,43 @@
       </div>
     </form>
     <div class="row match-height">
-      <div v-for="Audio in this.audios" class="col-lg-4 col-md-12 col-sm-12">
+      <div v-for="audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
         <div class="card" style="width=200px; height=200px;">
-          <h4 class="card-title" align="center">{{Audio.res.author.name}}</h4>
+          <h4 class="card-title" align="center">{{audio.res.author.name}}</h4>
           <div class="card-body">
             <div class="card-img" align="center">
-              <a data-toggle="modal" :data-target="getID(setPlayID(Audio._id))">
+              <a data-toggle="modal" :data-target="getID(setPlayID(audio._id))">
                 <img
                   style="height:150px; width:auto;"
                   class="card-img-top img-fluid"
-                  :src="Audio.res.screenshotUrl"
+                  :src="audio.res.screenshotUrl"
                   alt="Card image cap"
                 >
               </a>
             </div>
-              <div v-for="category in Audio.res.categories"  align="center">
-                  <button style="vertical-align: top;" class="plugin-category" >{{category}}</button>
+              <div v-for="category in audio.res.categories"  align="center">
             </div>
              <div class="divider"></div>
-
-
-
             <div class="card-block" style="padding-left: 50px;">
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
-                :data-target="getID(Audio._id)"
+                :data-target="getID(audio._id)"
                 style="width: 200px;"
-              >EDIT</a>
-              
+              >
+              EDIT
+             </a> 
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
-                :data-target="getID(setDetailsAudio(Audio._id))"
+                :data-target="getID(setDetailsAudio(audio._id))"
                 style="width: 200px;"
-              >DETAILS</a>
-              
+              >DETAILS
+              </a>
               <a
                 class="btn btn-floating halfway-fab bg-warning"
                 data-toggle="modal"
-                :data-target="getID(setdeleteID(Audio._id))"
+                :data-target="getID(setdeleteID(audio._id))"
               >
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </a>
@@ -76,7 +73,7 @@
         <div
           class="modal fade text-left"
           style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-          :id="Audio._id"
+          :id="audio._id"
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel34"
@@ -98,7 +95,7 @@
                       type="text"
                       placeholder="author"
                       class="form-control"
-                      v-model="Audio.res.author.name"
+                      v-model="audio.res.author.name"
                     >
                     <div class="form-control-position">
                       <i
@@ -113,7 +110,7 @@
                       type="brand"
                       placeholder="brand"
                       class="form-control"
-                      v-model="Audio.res.brand"
+                      v-model="audio.res.brand"
                     >
                     <div class="form-control-position">
                       <i class="fa fa-link font-medium-1 line-height-1 text-muted icon-align"></i>
@@ -125,7 +122,7 @@
                     <textarea
                       placeholder="Type here ..."
                       class="form-control"
-                      v-model="Audio.res.description"
+                      v-model="audio.res.description"
                     ></textarea>
                     <div class="form-control-position">
                       <i
@@ -143,7 +140,7 @@
                   >
                   <input
                     type="button"
-                    v-on:click="editAudio(Audio)"
+                    v-on:click="editAudio(audio)"
                     data-dismiss="modal"
                     class="btn btn-outline-warning btn-lg"
                     value="Edit"
@@ -158,7 +155,7 @@
         <div
           class="modal fade text-left"
           style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-          :id="setdeleteID(Audio._id)"
+          :id="setdeleteID(audio._id)"
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel34"
@@ -174,12 +171,12 @@
                 <div class="swal2-icon swal2-warning pulse-warning" style="display: block;">!</div>
 
                 <h2>Vous etes sure ?</h2>
-                {{Audio.res.author}}
+                {{audio.res.author}}
                 <div class="swal2-content" style="display: block;">You won't be able to revert this!</div>
 
                 <hr class="swal2-spacer" style="display: block;">
                 <button
-                  v-on:click="removeAudio(Audio)"
+                  v-on:click="removeAudio(audio)"
                   data-dismiss="modal"
                   class="swal2-confirm btn btn-success btn-raised mr-5"
                   style
@@ -197,7 +194,7 @@
         <div
           class="modal fade text-left"
           style="position : fixed;top : 0;right : 0;bottom : 0;left : 0;z-index : 1040;background-color : rgba(0,0,0,0.5);"
-          :id="setDetailsAudio(Audio._id)"
+          :id="setDetailsAudio(audio._id)"
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel34"
@@ -219,8 +216,8 @@
                         <label>author:</label>
                       </td>
                       <td>
-                        {{Audio.res.author.name}}
-                        <img style="height:50px; width:auto;" :src="Audio.res.author.avatarUrl">
+                        {{audio.res.author.name}}
+                        <img style="height:50px; width:auto;" :src="audio.res.author.avatarUrl">
                       </td>
                     </tr>
                     <tr>
@@ -228,7 +225,7 @@
                         <label>brand:</label>
                       </td>
                       <td>
-                        {{Audio.res.brand}}
+                        {{audio.res.brand}}
                       </td>
                     </tr>
                     <tr>
@@ -236,7 +233,7 @@
                         <label>categories:</label>
                       </td>
                       <td>
-                        {{Audio.categories}}
+                        {{audio.categories}}
                       </td>
                     </tr>
                     <tr>
@@ -244,7 +241,7 @@
                         <label>description:</label>
                       </td>
                       <td>
-                        {{Audio.res.description}}
+                        {{audio.res.description}}
                       </td>
                     </tr>
                     <tr>
@@ -252,7 +249,7 @@
                         <label>label:</label>
                       </td>
                       <td>
-                        {{Audio.res.label}}
+                        {{audio.res.label}}
                       </td>
                     </tr>
                     <tr>
@@ -260,7 +257,7 @@
                         <label>name:</label>
                       </td>
                       <td>
-                        {{Audio.res.name}}
+                        {{audio.res.name}}
                       </td>
                     </tr>
                     <tr>
@@ -268,7 +265,7 @@
                         <label>pedalboardCount:</label>
                       </td>
                       <td>
-                        {{Audio.res.pedalboardCount}}
+                        {{audio.res.pedalboardCount}}
                       </td>
                     </tr>
                     <tr>
@@ -276,7 +273,7 @@
                         <label>stable:</label>
                       </td>
                       <td>
-                       {{Audio.res.stable}}
+                       {{audio.res.stable}}
                       </td>
                     </tr>
                     <tr>
@@ -284,7 +281,7 @@
                         <label>uri:</label>
                       </td>
                       <td>
-                        <a :href="Audio.res.uri">Clicker sur ce lien</a>
+                        <a :href="audio.res.uri">Clicker sur ce lien</a>
                       </td>
                     </tr>
                     <tr>
@@ -292,7 +289,7 @@
                         <label>version:</label>
                       </td>remaincalm.
                       <td>
-                        {{Audio.res.version}}
+                        {{audio.res.version}}
                       </td>
                     </tr>
                     <tr>
@@ -300,7 +297,7 @@
                         <label>screenshot:</label>
                       </td>
                       <td>
-                        <img style="height:50px; width:auto;" :src="Audio.res.screenshotUrl">
+                        <img style="height:50px; width:auto;" :src="audio.res.screenshotUrl">
                       </td>
                     </tr>
                   </table>
@@ -314,7 +311,7 @@
                       <td>max</td>
                       <td>min</td>
                     </tr>
-                    <tr v-for="controlPort in Audio.res.controlPorts">
+                    <tr v-for="controlPort in audio.res.controlPorts">
                       <td>
                         {{controlPort.name}}
                       </td>
@@ -505,20 +502,15 @@ export default {
           });
       }
     },
-     removeAudio: function(Audio) {
+     removeAudio: function(audio) {
       console.log("--- DELETE AUDIO ---");
-      let url = "http://localhost:8080/api/audios/"+ Audio._id;
-     console.log(Audio);
+      let url = "http://localhost:8080/api/audios/"+ audio.res._id;
+     console.log(audio.res._id);
       fetch(url, {
         method: "DELETE"
       })
         .then(responseJSON => {
-          console.log(responseJSON)
-        
-          //this.Audios.splice(idx, 1);
-          //alert("Ce audio a été supprimé");
-          //this.showMessage = true;
-         // window.location.reload(true)
+         window.location.reload(true)
          
         })
         .catch(function(err) {
