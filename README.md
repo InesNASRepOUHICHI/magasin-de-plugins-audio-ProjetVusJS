@@ -89,34 +89,49 @@ Une jointure est faite entre les deux bases de données pour permettre à un ven
 
 Un utilisateur doit s’authentifier pour accéder à la plateforme.
 
+![Authentification](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Authentification.png)
+
 
 **Page d'accueil**
 
 Cette page contient tous les plugins disponibles :
+![Page d'accueil](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Accueil.png)
 
 
 Si on scrolle on voit le catalogue des plugins disponibles :
+
+![Page d'accueil](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Accueil2.png)
 
 En cliquant sur le bouton **« Go To Plugins Shop »** en bas de la page, on peut voir tous les plugins.
 
 **Plugins Shop**
 
-Dans cette page, on peut chercher tous les plugins existants, naviguer entre les pages de plugins et choisir combien de page on veut afficher. L’utilisateur peut aussi voir le détail de chaque audio.
+Dans cette page, on peut chercher tous les plugins existants, naviguer entre les pages de plugins et choisir combien de page on veut afficher. 
 
+![Plugins Shop](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/PluginsShop.png)
 
 
 **Mes Plugins**
 
 Cette page contient les plugins que l’utilisateur connecté a ajoutés.
 
+![My Plugins](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/MyPlugins.png)
+
 Il peut afficher les détails d’un plugin. En cliquant sur le bouton « Détails », un modèle des détails est affiché.
+
+![Details](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Details.png)
 
 Il peut modifier un plugin. En cliquant sur le bouton « Edit », un formulaire de modification est affiché.
 
+![Edit](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Edit.png)
+
 Il peut supprimer un plugin. En cliquant sur le bouton « Supprimer », une alerte de confirmation de la suppression est affichée.
+
+![Supprimer](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/Supprimer.png)
 
 Il peut ajouter un nouveau plugin en cliquant sur le lien « Add new Audio » dans le menu. Ce lien lui redirige vers le formulaire d’ajout d’un nouveau plugin.
 
+![Add plugin](https://github.com/InesNASRepOUHICHI/magasin-de-plugins-audio-ProjetVusJS/blob/master/audios/Docs/Images/NewAudio.png)
 
 **Structure du répertoire**
 
