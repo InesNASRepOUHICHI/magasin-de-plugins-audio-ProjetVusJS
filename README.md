@@ -57,7 +57,7 @@ Un vendeur connecté (authentifié) peut ajouter des audios et les gérer (modif
 
 Exemple de compte de test: 
 
-**Login:** Test@gmail.com
+**Login:** test@gmail.com
 
 **Password**: test
 
