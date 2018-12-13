@@ -25,7 +25,7 @@
       </div>
     </form>
     <div class="row match-height">
-      <div v-for="audio in this.audios" :key="audio.id" class="col-lg-4 col-md-12 col-sm-12">
+      <div v-for="audio in filteredData" class="col-lg-4 col-md-12 col-sm-12">
         <div class="card" style="width=200px; height=200px;">
           <h4 class="card-title" align="center">{{audio.res.author.name}}</h4>
           <div class="card-body">
@@ -39,28 +39,24 @@
                 >
               </a>
             </div>
-              <div v-for="category in audio.res.categories" :key="category.id"   align="center">
-                  <button style="vertical-align: top;" class="plugin-category" >{{category}}</button>
-            </div>
+             
              <div class="divider"></div>
-
-
-
             <div class="card-block" style="padding-left: 50px;">
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
                 :data-target="getID(audio._id)"
                 style="width: 200px;"
-              >EDIT</a>
-              
+              >
+              EDIT
+             </a> 
               <a
                 class="btn btn-outline-warning"
                 data-toggle="modal"
                 :data-target="getID(setDetailsAudio(audio._id))"
                 style="width: 200px;"
-              >DETAILS</a>
-              
+              >DETAILS
+              </a>
               <a
                 class="btn btn-floating halfway-fab bg-warning"
                 data-toggle="modal"
@@ -284,7 +280,7 @@
                         <label>Uri:</label>
                       </td>
                       <td>
-                        <a :href="audio.res.uri">Lien Image Audio</a>
+                        <a :href="audio.res.uri">Clicker sur ce lien</a>
                       </td>
                     </tr>
                     <tr>
@@ -507,18 +503,14 @@ export default {
     },
      removeAudio: function(audio) {
       console.log("--- DELETE AUDIO ---");
-      let url = "http://localhost:8080/api/audios/"+ audio._id;
-    // console.log(Audio);
+      let url = "http://localhost:8080/api/audios/"+ audio.res._id;
+     console.log(audio.res._id);
+
       fetch(url, {
         method: "DELETE"
       })
         .then(responseJSON => {
-          console.log(responseJSON)
-        
-          //this.Audios.splice(idx, 1);
-          //alert("Ce audio a été supprimé");
-          //this.showMessage = true;
-         // window.location.reload(true)
+         window.location.reload(true)
          
         })
         .catch(function(err) {
